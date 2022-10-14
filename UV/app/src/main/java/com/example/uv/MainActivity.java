@@ -18,19 +18,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Es la variable la cual se utilizara para mostrar la información en la interfaz del sistema
         txm = (TextView) findViewById(R.id.text1);
-
         try {
+            //Menu donde llamaremos a los metodos que se ejucataran cuando se ejecute el programa completo
             openDatabase();
             createTable();
+            //getTriggerMateriaSalon();
             insertarDatosMaterias();
             insertarDatosSalon();
-            //crearTriggerMateriaSalon();
+
             insertarDatosAcademico();
             insertarDatosAcademicoSalon();
             insertarHorario();
             insertarDatosMateriaSalon();
-            //consultaMateriasa();
+            consultaMateriasa();
             txm.append("\n Como usuario puedo consultar información de materias según un horario especificado para saber qué materias se imparten en ese horario \n");
             consultaHorarioMateria();
             txm.append("\n Como usuario puedo consultar información sobre profesores según un horario dado para saber los salones en los que da clases \n");
@@ -48,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void openDatabase() {
+        //Se crea la base de datos de manera local
         try {
+            //Se indica donde la ruta donde guardara la base de datos, ademas pregunta si ya esta creada si no la crea si es necesario
             db = SQLiteDatabase.openDatabase("data/data/com.example.uv/Aulas", null, SQLiteDatabase.CREATE_IF_NECESSARY);
             Toast.makeText(this, "DB was opened!", Toast.LENGTH_LONG).show();
         } catch (SQLiteException e) {
@@ -58,20 +62,20 @@ public class MainActivity extends AppCompatActivity {
     }//createDatabase
 
     private void createTable(){
+        //Creación de todas la tablas que se necesitaran
         db.beginTransaction();
         try{
-
-
-            db.execSQL("create table Materias(NRC integer PRIMARY KEY NOT NULL, CARRERA text, EE text, IDPERSONAL integer, FOREIGN KEY(IDPERSONAL) REFERENCES Academico(NUMPERSONAL));");
-
+            //Tabla Materias que se compone de NRC llave primaria, Carrera, Experiencia Educativa, Seccion, Bloque,Id_Personal del academico que la va a impartir
+            db.execSQL("create table Materias(NRC integer PRIMARY KEY NOT NULL, CARRERA text, EE text, BLOQUE integer,SECCION integer,IDPERSONAL integer, FOREIGN KEY(IDPERSONAL) REFERENCES Academico(NUMPERSONAL));");
+            //Tabla Salon que se compone de Numero de Salon llave primaria y Edificio
             db.execSQL("create table Salon(NUMSALON text PRIMARY KEY NOT NULL, EDIFICIO text);");
-
-            db.execSQL("create table Academico(NUMPERSONAL integer PRIMARY KEY NOT NULL, ACADEMICO text, APELLIDOPATERNO text, APELLIDOMATERNO text);");
-
+            //Tabla Academico que se compone de Numero Personal, Nombre, Appelido Paterno, Apellido Materno
+            db.execSQL("create table Academico(NUMPERSONAL integer PRIMARY KEY NOT NULL, NOMBRE text, APELLIDOPATERNO text, APELLIDOMATERNO text);");
+            //Tabla Horario, esta se crea por la relacion de la tabla Materias, con la tabla Salon, asi mismo a esta tabla se le agregara una llave compuesta como primaria que contendran las llaves primarias de la tabla Materia y Salon,ademas de sus respectivos atributos, Lunes, Martes, Miercoles, Jueves, Viernes.
             db.execSQL("create table Horario(IDNRC integer NOT NULL, IDSALON text NOT NULL,LUNES text,MARTES text, MIERCOLES text, JUEVES text, VIERNES text, PRIMARY KEY(IDNRC,IDSALON), FOREIGN KEY(IDNRC) REFERENCES Materias(NRC), FOREIGN KEY(IDSALON) REFERENCES Salon(NUMSALON));");
-
+            //Tabla AcademicoSalon esta se crea por la relacion de la tabla de Salon y Academico, asi mismo a esta tabla se le agregara una llave compuesta como primaria que contendran las llaves primarias de Salon y Academico
             db.execSQL("create table AcademicoSalon(IDPERSONAL integer NOT NULL, IDSALON text NOT NULL, PRIMARY KEY(IDPERSONAL,IDSALON), FOREIGN KEY(IDPERSONAL) REFERENCES Academico(NUMPERSONAL), FOREIGN KEY(IDSALON) REFERENCES Salon(NUMSALON))");
-
+            //Tabla MateriaSalon esta se crea por la relacion de la tabla de Materia y Salon, asi mismo a esta tabla se le agregara una llave compuesta como primaria que contendran las llaves primarias de Materia con Salon
             db.execSQL("create table MateriaSalon(IDNRC integer, IDSALON, PRIMARY KEY(IDNRC,IDSALON), FOREIGN KEY(IDNRC) REFERENCES Materias(NRC), FOREIGN KEY(IDSALON) REFERENCES Salon(NUMSALON))");
             //Toast.makeText(this,"Creado",Toast.LENGTH_LONG).show();
         }catch(SQLException e){
@@ -80,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void dropTable(String Tabla){
+        //Eliminacion de tablas
+        //Este metodo no se utilizara por el momento
         try {
             db.execSQL(" drop table "+ Tabla+";");
             Toast.makeText(this,"eliminado",Toast.LENGTH_LONG).show();
@@ -89,14 +95,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void insertarDatosMaterias(){
+        //En este metodo se agregaran todas la materias de las carreras, se iran comentando las
         db.beginTransaction();
         try {
-            db.execSQL("insert into Materias(NRC,CARRERA,EE,IDPERSONAL) values " +
-                    "(73230,'ISOF','FUNDAMENTOS DE MATEMATICAS',0001)," +
-                    "(73236,'ISOF','FUNDAMENTOS DE MATEMATICAS',0002)," +
-                    "(73231,'ISOF','INTRODUCCON A LA PROGRAMACION',0003)," +
-                    "(73237,'ISOF','INTRODUCCION A LA PROGRAMACION',0004)," +
-                    "(73272,'ISOF','HABILIDADES DEL PENSAMIENTO',0005)"+";");
+            //Insertar Información de Materia de la Facultad de Ingeniería de Software
+            db.execSQL("insert into Materias(NRC,CARRERA,EE,BLOQUE,SECCION,IDPERSONAL) values " +
+                    "(73230,'ISOF','FUNDAMENTOS DE MATEMATICAS',1,1,0001)," +
+                    "(73236,'ISOF','FUNDAMENTOS DE MATEMATICAS',1,2,0002)," +
+                    "(73231,'ISOF','INTRODUCCON A LA PROGRAMACION',1,1,0003)," +
+                    "(73237,'ISOF','INTRODUCCION A LA PROGRAMACION',1,2,0004)," +
+                    "(73272,'ISOF','HABILIDADES DEL PENSAMIENTO',1,1,0005)"+";");
 
             Toast.makeText(this,"insertados",Toast.LENGTH_LONG).show();
             db.setTransactionSuccessful();
@@ -180,8 +188,6 @@ public class MainActivity extends AppCompatActivity {
                     "(73236,'106','13:00-15:00')");
 
 
-            //db.execSQL("insert into Horario()");
-
             db.setTransactionSuccessful();
         }catch(SQLiteException e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
@@ -190,16 +196,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-   /* private void crearTriggerMateriaSalon(){
+    //Por el momento funciona pero no de forma que esperaba, tendre que modificarlo
+    private void getTriggerMateriaSalon(){
+        //se crea el trigger para insertar la llave primaria de las tablas Materia, Salon para que se agregen a la tabla MateriaSalon de manera automatica
         db.beginTransaction();
         try{
+            //trigger para agregar la llave primaria de la tabla Materias a MateriaSalon en el espacio que se le indica
             db.execSQL("create trigger triger_MateriaSalon " +
                     "BEFORE INSERT on Materias " +
                     "BEGIN " +
                     "insert into MateriaSalon(IDNRC) " +
                     "values(NEW.NRC);" +
                     "END;");
-
+            //trigger para agregar la llave primaria de la tabla Salon a MateriaSalon en el espacio que se le indica
             db.execSQL("create trigger triger_MateriaSa " +
                     "BEFORE INSERT on Salon " +
                     "BEGIN " +
@@ -213,18 +222,27 @@ public class MainActivity extends AppCompatActivity {
         }finally {
             db.endTransaction();
         }
-    }*/
+    }
 
+    //Metodo para consulta
     private void consultaMateriasa(){
+        //Es una consulta de la tabla MateriaSalon donde se muestran su campos que son la llaves foraneas de Materias y Salon
+        //Variables que ocuparemos para guardar la informacion de la tuplas
         String idnrc,idsalon;
         try{
+            //En un string guardamos la consulta
             String sql = "select IDNRC,IDSALON from MateriaSalon";
+            //Aqui se colocara la instruccion que debe realizar la base de datos.
             Cursor c = db.rawQuery(sql,null);
-            int uno = c.getColumnIndex("IDNRC");
-            int dos = c.getColumnIndex("IDSALON");
+            //Se guardan en variables de tipo entero, el numero de la columna, en este caso del IDNRC
+            int idnrc1 = c.getColumnIndex("IDNRC");
+            int idsalon1 = c.getColumnIndex("IDSALON");
+            //En este bluque lo que hara sera revisar todas las tuplas de la tabla
             while(c.moveToNext()){
-                idnrc = c.getString(uno);
-                idsalon = c.getString(dos);
+                //Se obtinen los datos de la columna por el numero de columna obtenido
+                idnrc = c.getString(idnrc1);
+                idsalon = c.getString(idsalon1);
+                //Se muestran en patalla los datos
                 txm.append("\n" + "IDNRC: " + idnrc + "\n" + "IDSALON: " + idsalon + "\n");
             }
         }catch (SQLiteException e){
@@ -233,28 +251,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
         private void consultaHorarioMateria(){
-        String facu,ee, lune,marte,mier,jue,vier;
-        //HAY PEDOS
+        //Variables que ocuparemos para guardar la informacion de la tuplas
+        String carrera,ee, lunes,martes,miercoles,jueves,viernes;
+
         try{
+            //En un string guardamos la consulta
             String sql = "select CARRERA,EE,LUNES,MARTES,MIERCOLES,JUEVES,VIERNES from Materias m INNER JOIN Horario h ON m.NRC = h.IDNRC WHERE h.Lunes= '13:00-15:00' or h.Martes='13:00-15:00' or h.Miercoles='13:00-15:00' or h.JUEVES = '13:00-15:00' or h.VIERNES = '13:00-15:00'";
+            //Aqui se colocara la instruccion que debe realizar la base de datos.
             Cursor c = db.rawQuery(sql,null);
-            int fac = c.getColumnIndex("CARRERA");
-            int mate = c.getColumnIndex("EE");
-            int lu = c.getColumnIndex("LUNES");
-            int ma = c.getColumnIndex("MARTES");
-            int mi = c.getColumnIndex("MIERCOLES");
-            int ju = c.getColumnIndex("JUEVES");
-            int vi = c.getColumnIndex("VIERNES");
+            //Se guardan en variables de tipo entero, el numero de la columna
+            int carrera1 = c.getColumnIndex("CARRERA");
+            int materia = c.getColumnIndex("EE");
+            int lunes1 = c.getColumnIndex("LUNES");
+            int martes1 = c.getColumnIndex("MARTES");
+            int miercoles1 = c.getColumnIndex("MIERCOLES");
+            int jueves1 = c.getColumnIndex("JUEVES");
+            int viernes1 = c.getColumnIndex("VIERNES");
+            //En este bluque lo que hara sera revisar todas las tuplas de la tabla
             while(c.moveToNext()){
-                facu = c.getString(fac);
-                ee = c.getString(mate);
-                lune = c.getString(lu);
-                marte = c.getString(ma);
-                mier = c.getString(mi);
-                jue = c.getString(ju);
-                vier = c.getString(vi);
-                txm.append("\n" + "CARRERA: "+ facu + "\n"+ "EE: " + ee + "\n" + "LUNES: " + lune + "\n" + "MARTES: " + marte + "\n" + "MIERCOLES " + mier +
-                "\n" + "JUEVES: " + jue + "\n" + "VIERNES: " + vier + "\n");
+                //Se obtinen los datos de la columna por el numero de columna obtenido
+                carrera = c.getString(carrera1);
+                ee = c.getString(materia);
+                lunes = c.getString(lunes1);
+                martes = c.getString(martes1);
+                miercoles = c.getString(miercoles1);
+                jueves = c.getString(jueves1);
+                viernes = c.getString(viernes1);
+                //Se muestran en patalla los datos
+                txm.append("\n" + "CARRERA: "+ carrera + "\n"+ "EE: " + ee + "\n" + "LUNES: " + lunes + "\n" + "MARTES: " + martes + "\n" + "MIERCOLES " + miercoles +
+                "\n" + "JUEVES: " + jueves + "\n" + "VIERNES: " + viernes + "\n");
             }
         }catch(SQLiteException e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
@@ -262,31 +287,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
         private void consultaHorarioMateriaSalon(){
-        String facu,ee,lune,marte,mier,jue,vier,salon,edi;
+        String carrera,ee,lunes,martes,miercoles,jueves,viernes,salon,edificio;
         try {
+            //En un string guardamos la consulta
             String sql = "select Facultad,NombreEE,Lunes,Martes,Miercoles,Jueves,Viernes,NumSalon,Edificio from Materias as m INNER JOIN Horario as h ON m.NRC = h.IDNRC INNER JOIN Salon as s ON h.IDSALON = s.NumSalon";
+            //Aqui se colocara la instruccion que debe realizar la base de datos.
             Cursor c = db.rawQuery(sql,null);
-            int fac = c.getColumnIndex("Facultad");
-            int mate = c.getColumnIndex("NombreEE");
-            int lu = c.getColumnIndex("Lunes");
-            int ma = c.getColumnIndex("Martes");
-            int mi = c.getColumnIndex("Miercoles");
-            int ju = c.getColumnIndex("Jueves");
-            int vi = c.getColumnIndex("Viernes");
-            int sa = c.getColumnIndex("NumSalon");
-            int ed = c.getColumnIndex("Edificio");
+            //Se guardan en variables de tipo entero, el numero de la columna
+            int carrera1 = c.getColumnIndex("Facultad");
+            int materia = c.getColumnIndex("NombreEE");
+            int lunes1 = c.getColumnIndex("Lunes");
+            int martes1 = c.getColumnIndex("Martes");
+            int miercoles1 = c.getColumnIndex("Miercoles");
+            int jueves1 = c.getColumnIndex("Jueves");
+            int viernes1 = c.getColumnIndex("Viernes");
+            int salon1 = c.getColumnIndex("NumSalon");
+            int edificio1 = c.getColumnIndex("Edificio");
+            //En este bluque lo que hara sera revisar todas las tuplas de la tabla
             while(c.moveToNext()){
-                facu = c.getString(fac);
-                ee = c.getString(mate);
-                lune = c.getString(lu);
-                marte = c.getString(ma);
-                mier = c.getString(mi);
-                jue = c.getString(ju);
-                vier = c.getString(vi);
-                salon = c.getString(sa);
-                edi = c.getString(ed);
-                txm.append("\n" + "FACULTAD: "+ facu + "\n"+ "EE: " + ee + "\n" + "LUNES: " + lune + "\n" + "MARTES: " + marte + "\n" + "MIERCOLES " + mier +
-                        "\n" + "JUEVES: " + jue + "\n" + "VIERNES: " + vier + "\n" + "SALON: "+ salon + "\n" + "EDIFICIO: " + edi  +"\n");
+                //Se obtinen los datos de la columna por el numero de columna obtenido
+                carrera = c.getString(carrera1);
+                ee = c.getString(materia);
+                lunes = c.getString(lunes1);
+                martes = c.getString(martes1);
+                miercoles = c.getString(miercoles1);
+                jueves = c.getString(jueves1);
+                viernes = c.getString(viernes1);
+                salon = c.getString(salon1);
+                edificio = c.getString(edificio1);
+                //Se muestran en patalla los datos
+                txm.append("\n" + "FACULTAD: "+ carrera + "\n"+ "EE: " + ee + "\n" + "LUNES: " + lunes + "\n" + "MARTES: " + martes + "\n" + "MIERCOLES " + miercoles +
+                        "\n" + "JUEVES: " + jueves + "\n" + "VIERNES: " + viernes + "\n" + "SALON: "+ salon + "\n" + "EDIFICIO: " + edificio  +"\n");
             }
         }catch (SQLiteException e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
@@ -294,22 +325,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
         private void consultaSalonProfe(){
-        String salon, edifi, nombre, apep,apem;
+        String salon, edificio, nombre, apellidop,apellidom;
         try{
+            //En un string guardamos la consulta
             String sql = "select NUMSALON, EDIFICIO, ACADEMICO,APELLIDOPATERNO, APELLIDOMATERNO from Salon AS s INNER JOIN AcademicoSalon AS ac ON s.NUMSALON = ac.IDSALON INNER JOIN Academico AS a ON ac.IDPERSONAL = a.NUMPERSONAL WHERE s.NUMSALON = '104'";
+            //Aqui se colocara la instruccion que debe realizar la base de datos.
             Cursor c = db.rawQuery(sql,null);
-            int sa = c.getColumnIndex("NUMSALON");
-            int edi = c.getColumnIndex("EDIFICIO");
-            int nom = c.getColumnIndex("ACADEMICO");
-            int ape = c.getColumnIndex("APELLIDOPATERNO");
-            int apemm = c.getColumnIndex("APELLIDOMATERNO");
+            //Se guardan en variables de tipo entero, el numero de la columna
+            int salon1 = c.getColumnIndex("NUMSALON");
+            int edificio1 = c.getColumnIndex("EDIFICIO");
+            int nombre1 = c.getColumnIndex("ACADEMICO");
+            int apellidop1 = c.getColumnIndex("APELLIDOPATERNO");
+            int apellidom1 = c.getColumnIndex("APELLIDOMATERNO");
+            //En este bluque lo que hara sera revisar todas las tuplas de la tabla
             while(c.moveToNext()){
-                salon  = c.getString(sa);
-                edifi = c.getString(edi);
-                nombre = c.getString(nom);
-                apep = c.getString(ape);
-                apem = c.getString(apemm);
-                txm.append("\n" + "SALON: " + salon + "\n" + "EDIFICIO: " + edifi + "\n" + "NOMBRE: " + nombre + "\n" + "APELLIDOP: "+ apep + "\n" + "APELLIDOM: " + apem + "\n");
+                //Se obtinen los datos de la columna por el numero de columna obtenido
+                salon  = c.getString(salon1);
+                edificio = c.getString(edificio1);
+                nombre = c.getString(nombre1);
+                apellidop = c.getString(apellidop1);
+                apellidom = c.getString(apellidom1);
+                //Se muestran en patalla los datos
+                txm.append("\n" + "SALON: " + salon + "\n" + "EDIFICIO: " + edificio + "\n" + "NOMBRE: " + nombre + "\n" + "APELLIDOP: "+ apellidop + "\n" + "APELLIDOM: " + apellidom + "\n");
             }
         }catch(SQLiteException e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
@@ -317,27 +354,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
         private void consultaMateriaProfeSalon(){
-        String ee, facu, nombre, apep,apem, salon, edifi;
+        //Variables que ocuparemos para guardar la informacion de la tuplas
+        String ee, carrera, nombre, apellidop,apellidom, salon, edificio;
         try{
+            //En un string guardamos la consulta
             String sql = "select EE, CARRERA, ACADEMICO, APELLIDOPATERNO,APELLIDOMATERNO, NUMSALON, EDIFICIO from Materias AS m INNER JOIN Academico AS a ON m.IDPERSONAL = a.NUMPERSONAL INNER JOIN AcademicoSalon AS ac ON a.NUMPERSONAL = ac.IDPERSONAL INNER JOIN Salon AS s ON ac.IDSALON = s.NUMSALON WHERE m.EE = 'FUNDAMENTOS DE MATEMATICAS'";
+            //Aqui se colocara la instruccion que debe realizar la base de datos.
             Cursor c = db.rawQuery(sql,null);
-            int eee = c.getColumnIndex("EE");
-            int fac = c.getColumnIndex("CARRERA");
-            int nom = c.getColumnIndex("ACADEMICO");
-            int ape = c.getColumnIndex("APELLIDOPATERNO");
-            int apemm = c.getColumnIndex("APELLIDOMATERNO");
-            int sa = c.getColumnIndex("NUMSALON");
-            int ed = c.getColumnIndex("EDIFICIO");
+            //Se guardan en variables de tipo entero, el numero de la columna
+            int materia = c.getColumnIndex("EE");
+            int carrera1 = c.getColumnIndex("CARRERA");
+            int nombre1 = c.getColumnIndex("ACADEMICO");
+            int apellidopaterno = c.getColumnIndex("APELLIDOPATERNO");
+            int apellidomaterno = c.getColumnIndex("APELLIDOMATERNO");
+            int salon1 = c.getColumnIndex("NUMSALON");
+            int edificio1 = c.getColumnIndex("EDIFICIO");
+            //En este bluque lo que hara sera revisar todas las tuplas de la tabla
             while(c.moveToNext()) {
-                ee = c.getString(eee);
-                facu = c.getString(fac);
-                nombre = c.getString(nom);
-                apep = c.getString(ape);
-                apem = c.getString(apemm);
-                salon = c.getString(sa);
-                edifi = c.getString(ed);
-
-                txm.append("\n" + "EE: " + ee + "\n" + "CARRERA: " + facu + "\n" + "NOMBRE: "+ nombre + "\n" + "APELLIDOP: "+ apep + "\n" + "APELLIDOM: " + apem + "\n" + "SALON: " + salon + "\n" + "EDIFICIO: " + edifi + "\n");
+                //Se obtinen los datos de la columna por el numero de columna obtenido
+                ee = c.getString(materia);
+                carrera = c.getString(carrera1);
+                nombre = c.getString(nombre1);
+                apellidop = c.getString(apellidopaterno);
+                apellidom = c.getString(apellidomaterno);
+                salon = c.getString(salon1);
+                edificio = c.getString(edificio1);
+                //Se muestran en patalla los datos
+                txm.append("\n" + "EE: " + ee + "\n" + "CARRERA: " + carrera + "\n" + "NOMBRE: "+ nombre + "\n" + "APELLIDOP: "+ apellidop + "\n" + "APELLIDOM: " + apellidom + "\n" + "SALON: " + salon + "\n" + "EDIFICIO: " + edificio + "\n");
             }
             }catch(SQLiteException e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
@@ -345,20 +388,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void consultaMateriaSalonCarrera(){
-            String ee, facu, salon, edificio;
+        //Metodo para hacer una consulta por la carrera
+            //Variables que ocuparemos para guardar la informacion de la tuplas
+            String ee, carrera, salon, edificio;
             try{
+                //En un string guardamos la consulta
                 String sql  = "select  CARRERA, EE,NUMSALON, EDIFICIO from Materias AS m INNER JOIN MateriaSalon AS ms ON m.NRC = ms.IDNRC INNER JOIN Salon AS s ON ms.IDSALON = s.NUMSALON WHERE m.CARRERA = 'ISOF'";
+                //Aqui se colocara la instruccion que debe realizar la base de datos.
                 Cursor c = db.rawQuery(sql,null);
-                int fac = c.getColumnIndex("CARRERA");
-                int eee = c.getColumnIndex("EE");
-                int sa = c.getColumnIndex("NUMSALON");
-                int ed = c.getColumnIndex("EDIFICIO");
+                //Se guardan en variables de tipo entero, el numero de la columna
+                int carrera1 = c.getColumnIndex("CARRERA");
+                int materia = c.getColumnIndex("EE");
+                int salon1 = c.getColumnIndex("NUMSALON");
+                int edificio1 = c.getColumnIndex("EDIFICIO");
+                //En este bluque lo que hara sera revisar todas las tuplas de la tabla
                 while(c.moveToNext()){
-                    ee = c.getString(eee);
-                    facu = c.getString(fac);
-                    salon = c.getString(sa);
-                    edificio = c.getString(ed);
-                    txm.append("\n" + "EE: " + ee + "\n" + "CARRERA: " + facu + "\n" + "SALON: "+ salon + "\n" + "EDIFICIO: " + edificio + "\n");
+                    //Se obtinen los datos de la columna por el numero de columna obtenido
+                    ee = c.getString(materia);
+                    carrera = c.getString(carrera1);
+                    salon = c.getString(salon1);
+                    edificio = c.getString(edificio1);
+                    //Se muestran en patalla los datos
+                    txm.append("\n" + "EE: " + ee + "\n" + "CARRERA: " + carrera + "\n" + "SALON: "+ salon + "\n" + "EDIFICIO: " + edificio + "\n");
                 }
 
             }catch (SQLiteException e){
@@ -367,22 +418,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void consultaHorarioSalonProfe(){
-            String nombre,apep,apem,salon,edi;
+        //Metodo para hacer una consulta por media de un horario y que me arroje datos del academico, salon y edificio
+            //Variables que ocuparemos para guardar la informacion de la tuplas
+            String nombre,apellidop,apellidom,salon,edificio;
             try{
+                //En un string guardamos la consulta
                 String sql = "select ACADEMICO,APELLIDOPATERNO,APELLIDOMATERNO, NUMSALON, EDIFICIO from Academico AS a INNER JOIN AcademicoSalon AS ac ON a.NUMPERSONAL=ac.IDPERSONAL INNER JOIN Salon AS s ON ac.IDSALON=s.NUMSALON INNER JOIN Horario AS h ON s.NUMSALON=h.IDSALON WHERE h.VIERNES = '13:00-15:00';";
+                //Aqui se colocara la instruccion que debe realizar la base de datos.
                 Cursor c = db.rawQuery(sql,null);
-                int nom = c.getColumnIndex("ACADEMICO");
-                int ap = c.getColumnIndex("APELLIDOPATERNO");
-                int apm = c.getColumnIndex("APELLIDOMATERNO");
-                int sa = c.getColumnIndex("NUMSALON");
-                int ed = c.getColumnIndex("EDIFICIO");
+                //Se guardan en variables de tipo entero, el numero de la columna
+                int nombre1 = c.getColumnIndex("ACADEMICO");
+                int apellidopaterno = c.getColumnIndex("APELLIDOPATERNO");
+                int apellidomaterno = c.getColumnIndex("APELLIDOMATERNO");
+                int salon1 = c.getColumnIndex("NUMSALON");
+                int edificio1 = c.getColumnIndex("EDIFICIO");
+                //En este bluque lo que hara sera revisar todas las tuplas de la tabla
                 while(c.moveToNext()){
-                    nombre = c.getString(nom);
-                    apep = c.getString(ap);
-                    apem = c.getString(apm);
-                    salon = c.getString(sa);
-                    edi = c.getString(ed);
-                    txm.append("\n" + "NOMBRE " + nombre + "\n" + "APELLIDOP: " + apep + "\n" + "APELLIDOM: " + apem + "\n" + "SALON: " + salon + "\n" + "EDIFICIO: "+ edi + "\n");
+                    //Se obtinen los datos de la columna por el numero de columna obtenido
+                    nombre = c.getString(nombre1);
+                    apellidop = c.getString(apellidopaterno);
+                    apellidom = c.getString(apellidomaterno);
+                    salon = c.getString(salon1);
+                    edificio = c.getString(edificio1);
+                    //Se muestran en patalla los datos
+                    txm.append("\n" + "NOMBRE " + nombre + "\n" + "APELLIDOP: " + apellidop + "\n" + "APELLIDOM: " + apellidom + "\n" + "SALON: " + salon + "\n" + "EDIFICIO: "+ edificio + "\n");
                 }
             }catch(SQLiteException e){
                 Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
