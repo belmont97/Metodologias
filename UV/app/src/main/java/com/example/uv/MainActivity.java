@@ -147,9 +147,34 @@ public class MainActivity extends AppCompatActivity {
         db.beginTransaction();
         try{
             db.execSQL("insert into Salon(NUMSALON,EDIFICIO) values" +
-                    "('104','ECONEX')," +
+                    "('102','ECONEX')," +
+                    "('CC2','ECONEX')," +
+                    "('LABRED','FEI')," +
+                    "('F404','FEI')," +
                     "('106','ECONEX')," +
-                    "('108','ECONEX');");
+                    "('105','ECONEX')," +
+                    "('F101','FEI')," +
+                    "('FTC','FEI')," +
+                    "('CC3','ECONEX'),"+
+                    "('104','ECONEX')," +
+                    "('CC1','ECONEX')," +
+                    "('CIDI','ECONEX')," +
+                    "('F101','FEI'),"+
+                    "('F103','FEI'),"+
+                    "('6','ECONEX'),"+
+                    "('4','ECONEX'),"+
+                    "('107','ECONEX'),"+
+                    "('F403','FEI'),"+
+                    "('F102','FEI'),"+
+                    "('5','ECONEX'),"+
+                    "('111','ECONEX'),"+
+                    "('112','ECONEX'),"+
+                    "('F402','FEI'),"+
+                    "('113','ECONEX'),"+
+                    "('214','ECONEX'),"+
+                    "('103','ECONEX'),"+
+                    "('CDS','FEI')"+";");
+
 
             db.setTransactionSuccessful();
         }catch(SQLiteException e){
