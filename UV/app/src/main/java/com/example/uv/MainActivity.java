@@ -189,8 +189,41 @@ public class MainActivity extends AppCompatActivity {
         db.beginTransaction();
         try{
             db.execSQL("insert into Academico(NUMPERSONAL, ACADEMICO, APELLIDOPATERNO, APELLIDOMATERNO) values" +
-                    "(0001,'MARIBEL','CARMONA','GARCIA')," +
-                    "(0002,'JOSE JUAN','MUÑOZ','LEON');");
+                    "(0001,'EVERARDO FRANCISCO','GARCIA','MENIER')," +
+                    "(0002,'JUAN MANUEL','GUTIERREZ','MENDEZ')" +
+                    "(0003,'OSCAR','ALONSO','RAMIREZ')" +
+                    "(0004,'EDSEL','ORTIZ','ROMERO')" +
+                    "(0005,'MARIA DEL CARMEN','MEZURA','GODOY')\"+\n" +
+                    "(0006,'PATRICIA','GONZALEZ','GASPAR')\"+\n" +
+                    "(0007,'CARLOS','ILLESCAS','SANCHEZ')\"+\n" +
+                    "(0008,'ARMINDA','BARRADAS','SANCHEZ')\"+\n" +
+                    "(0009,'EDGAR IVAN','BENITEZ','GUERRERO')\"+\n" +
+                    "(0010,'MARTHA PATRICIA','RODRIGUEZ','GUZMAN')\"+\n" +
+                    "(0011,'')\"+\n" +
+                    "(0012,'')\"+\n" +
+                    "(0013,'')\"+\n" +
+                    "(0014,'')\"+\n" +
+                    "(0015,'')\"+\n" +
+                    "(0016,'')\"+\n" +
+                    "(0017,'')\"+\n" +
+                    "(0018,'')\"+\n" +
+                    "(0019,'')\"+\n" +
+                    "(0020,'')\"+\n" +
+                    //"(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\"+\n" +
+                    "(0002,'')\";");
 
             db.setTransactionSuccessful();
         }catch(SQLiteException e){
@@ -198,7 +231,6 @@ public class MainActivity extends AppCompatActivity {
         }finally {
             db.endTransaction();
         }
-
     }
 
     private void insertarHorario(){
