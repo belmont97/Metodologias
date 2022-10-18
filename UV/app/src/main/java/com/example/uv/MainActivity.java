@@ -104,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
                     "(73236,'ISOF','FUNDAMENTOS DE MATEMATICAS',1,2,0002)," +
                     "(73231,'ISOF','INTRODUCCON A LA PROGRAMACION',1,1,0003)," +
                     "(73237,'ISOF','INTRODUCCION A LA PROGRAMACION',1,2,0004)," +
-                    "(73272,'ISOF','HABILIDADES DEL PENSAMIENTO',1,1,0005)"+";");
+                    "(73272,'ISOF','HABILIDADES DEL PENSAMIENTO  (TEST)',1,1,0005)," +
+                    "(73273,'ISOF','HABILIDADES DEL PENSAMIENTO',1,2,0006)"+";");
 
             Toast.makeText(this,"insertados",Toast.LENGTH_LONG).show();
             db.setTransactionSuccessful();
