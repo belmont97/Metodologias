@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                     "(0022,'ULISES','MARINERO','AGUILAR')\"+\n" +
                     "(0023,'OSCAR','ALONSO','RAMIREZ')\"+\n" +
                     "(0024,'JOSE RAFAEL','ROJANO','CACERES')\"+\n" +
-                    "(0025,'MARIA DOLORES','VARGAS','CARDAN')\"+\n" +
+                    "(0025,'MARIA DOLORES','VARGAS','CERDAN')\"+\n" +
                     "(0026,'ERIKA','MENESES','RICO')\"+\n" +
                     "(0027,'JOSE GUILLERMO','HERNANDEZ','CALDERON')\"+\n" +
                     "(0028,'MARIA LUISA','CORDOBA','TLAXCALTECO')\"+\n" +
@@ -228,14 +228,14 @@ public class MainActivity extends AppCompatActivity {
                     "(0037,'NIELS','MARTINEZ','GUEVARA')\"+\n" +
                     "(0038,'RAMON','GOMEZ','ROMERO')\"+\n" +
                     //MAESTROS REDES
-                    "(0039,'')\"+\n" +
-                    "(0040,'')\"+\n" +
-                    "(0041,'')\"+\n" +
-                    "(0042,'')\"+\n" +
-                    "(0043,'')\"+\n" +
-                    "(0044,'')\"+\n" +
-                    "(0038,'')\"+\n" +
-                    "(0038,'')\"+\n" +
+                    "(0039,'Javier Sanchez Acosta')\"+\n" +
+                    "(0040,'Maria de los Angeles Arenas Valdes')\"+\n" +
+                    "(0041,'Reselia Osorio Armenta')\"+\n" +
+                    "(0042,'Alfonso Duran Hernandez')\"+\n" +
+                    "(0043,'Martha Elizabeth Dominguez Barcenas')\"+\n" +
+                    "(0044,'Victor Manuel Tlapa Carrera')\"+\n" +
+                    "(0038,'Viginia Lagunes Barradas')\"+\n" +
+                    "(0038,'Arminda Sanchez Barradas')\"+\n" +
                     "(0038,'')\"+\n" +
                     "(0038,'')\"+\n" +
                     "(0038,'')\"+\n" +
