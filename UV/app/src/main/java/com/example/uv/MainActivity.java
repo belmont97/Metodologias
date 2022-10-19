@@ -199,31 +199,74 @@ public class MainActivity extends AppCompatActivity {
                     "(0008,'ARMINDA','BARRADAS','SANCHEZ')\"+\n" +
                     "(0009,'EDGAR IVAN','BENITEZ','GUERRERO')\"+\n" +
                     "(0010,'MARTHA PATRICIA','RODRIGUEZ','GUZMAN')\"+\n" +
-                    "(0011,'')\"+\n" +
-                    "(0012,'')\"+\n" +
-                    "(0013,'')\"+\n" +
-                    "(0014,'')\"+\n" +
-                    "(0015,'')\"+\n" +
-                    "(0016,'')\"+\n" +
-                    "(0017,'')\"+\n" +
-                    "(0018,'')\"+\n" +
-                    "(0019,'')\"+\n" +
-                    "(0020,'')\"+\n" +
-                    //"(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\"+\n" +
-                    "(0002,'')\";");
+                    "(0011,'JESUS ROBERTO','MENDEZ','ORTIZ')\"+\n" +
+                    "(0012,'AQUILES','ORDUÑA','GONZALEZ')\"+\n" +
+                    "(0013,'RUTH','RODRIGUEZ','RAMIREZ')\"+\n" +
+                    "(0014,'LORENA','ALONSO','RAMIREZ')\"+\n" +
+                    "(0015,'MARIBEL','CARMONA','GARCIA')\"+\n" +
+                    "(0016,'MARIA DE LOURDES','HERNANDEZ','RODRIGUEZ')\"+\n" +
+                    "(0017,'MARIA DE LOS ANGELES','NAVARRO','GUERRERO')\"+\n" +
+                    "(0018,'VICTOR MANUEL','HERNANDEZ','OLIVERA')\"+\n" +
+                    "(0019,'FREDY','CASTAÑEDA','SANCHEZ')\"+\n" +
+                    "(0020,'PATRICIA','DIAZ','GASPAR')\"+\n" +
+                    "(0021,'CRISTHIAN','PEREZ','SALAZAR')\"+\n" +
+                    "(0022,'ULISES','MARINERO','AGUILAR')\"+\n" +
+                    "(0023,'OSCAR','ALONSO','RAMIREZ')\"+\n" +
+                    "(0024,'JOSE RAFAEL','ROJANO','CACERES')\"+\n" +
+                    "(0025,'MARIA DOLORES','VARGAS','CARDAN')\"+\n" +
+                    "(0026,'ERIKA','MENESES','RICO')\"+\n" +
+                    "(0027,'JOSE GUILLERMO','HERNANDEZ','CALDERON')\"+\n" +
+                    "(0028,'MARIA LUISA','CORDOBA','TLAXCALTECO')\"+\n" +
+                    "(0029,'ALFONSO','SANCHEZ','OREA')\"+\n" +
+                    "(0030,'LUIS GERARDO','MONTANE','JIMENEZ')\"+\n" +
+                    "(0031,'DIANA ELIZABETH','VALDERRABANO','PEDRAZA')\"+\n" +
+                    "(0032,'MARGARITA EDITH','CANAL','MARTINEZ')\"+\n" +
+                    "(0033,'ALICIA YAZMIN','ROJAS','LUNA')\"+\n" +
+                    "(0034,'RAMON DAVID','SARMIENTO','CERVANTES')\"+\n" +
+                    "(0035,'ITZEL ALESSANDRA','REYES','FLORES')\"+\n" +
+                    "(0036,'MAX WILLIAM','MILLAN','MARTINEZ')\"+\n" +
+                    "(0037,'NIELS','MARTINEZ','GUEVARA')\"+\n" +
+                    "(0038,'RAMON','GOMEZ','ROMERO')\"+\n" +
+                    //MAESTROS REDES
+                    "(0039,'')\"+\n" +
+                    "(0040,'')\"+\n" +
+                    "(0041,'')\"+\n" +
+                    "(0042,'')\"+\n" +
+                    "(0043,'')\"+\n" +
+                    "(0044,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0038,'')\"+\n" +
+                    "(0000,'')\";");
 
             db.setTransactionSuccessful();
         }catch(SQLiteException e){
