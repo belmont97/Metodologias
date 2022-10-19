@@ -100,12 +100,28 @@ public class MainActivity extends AppCompatActivity {
         try {
             //Insertar Información de Materia de la Facultad de Ingeniería de Software
             db.execSQL("insert into Materias(NRC,CARRERA,EE,BLOQUE,SECCION,IDPERSONAL) values " +
-                    "(73230,'ISOF','FUNDAMENTOS DE MATEMATICAS',1,1,0001)," +
-                    "(73236,'ISOF','FUNDAMENTOS DE MATEMATICAS',1,2,0002)," +
-                    "(73231,'ISOF','INTRODUCCON A LA PROGRAMACION',1,1,0003)," +
-                    "(73237,'ISOF','INTRODUCCION A LA PROGRAMACION',1,2,0004)," +
-                    "(73272,'ISOF','HABILIDADES DEL PENSAMIENTO  (TEST)',1,1,0005)," +
-                    "(73273,'ISOF','HABILIDADES DEL PENSAMIENTO',1,2,0006)"+";");
+                    "(73294,'TECO','FUNDAMENTOS DE MATEMATICAS',1,2,0001)," +
+                    "(75653,'TECO','ORGANIZACION DE COMPUTADORAS',3,2,0002)," +
+                    "(75774,'TECO','PROGRAMACION',3,1,0003)," +
+                    "(75651,'TECO','ORGANIZACION DE COMPUTADORAS',3,1,0004)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0005)," +
+                    "(73285,'TECO','INTRODUCCION A LA PROGRAMACION',1,1,0006)," +
+                    "(76830,'TECO','HABILIDADES DEL PENSAMIENTO',1,1,0007)," +
+                    "(73288,'TECO','INGLES 1',1,1,0008)," +
+                    "(75655,'TECO','BASE DE DATOS',3,1,0009)," +
+                    "(97582,'TECO','INGLES 2',3,2,0010)," +
+                    "(80630,'TECO','ADMINISTRACION DE SERVIDORES',5,1,0011)," +
+                    "(80634,'TECO','HABILIDADES DIRECTIVAS',5,1,0012)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0013)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0014)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0015)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0016)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0017)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0018)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0019)," +
+                    "(73273,'TECO','HABILIDADES DEL PENSAMIENTO',1,2,0006)"+";");
+
+
 
             Toast.makeText(this,"insertados",Toast.LENGTH_LONG).show();
             db.setTransactionSuccessful();
