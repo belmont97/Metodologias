@@ -100,11 +100,28 @@ public class MainActivity extends AppCompatActivity {
         try {
             //Insertar Información de Materia de la Facultad de Ingeniería de Software
             db.execSQL("insert into Materias(NRC,CARRERA,EE,BLOQUE,SECCION,IDPERSONAL) values " +
-                    "(73230,'ISOF','FUNDAMENTOS DE MATEMATICAS',1,1,0001)," +
-                    "(73236,'ISOF','FUNDAMENTOS DE MATEMATICAS',1,2,0002)," +
-                    "(73231,'ISOF','INTRODUCCON A LA PROGRAMACION',1,1,0003)," +
-                    "(73237,'ISOF','INTRODUCCION A LA PROGRAMACION',1,2,0004)," +
-                    "(73272,'ISOF','HABILIDADES DEL PENSAMIENTO',1,1,0005)"+";");
+                    "(73294,'TECO','FUNDAMENTOS DE MATEMATICAS',1,2,0001)," +
+                    "(75653,'TECO','ORGANIZACION DE COMPUTADORAS',3,2,0002)," +
+                    "(75774,'TECO','PROGRAMACION',3,1,0003)," +
+                    "(75651,'TECO','ORGANIZACION DE COMPUTADORAS',3,1,0004)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0005)," +
+                    "(73285,'TECO','INTRODUCCION A LA PROGRAMACION',1,1,0006)," +
+                    "(76830,'TECO','HABILIDADES DEL PENSAMIENTO',1,1,0007)," +
+                    "(73288,'TECO','INGLES 1',1,1,0008)," +
+                    "(75655,'TECO','BASE DE DATOS',3,1,0009)," +
+                    "(97582,'TECO','INGLES 2',3,2,0010)," +
+                    "(80630,'TECO','ADMINISTRACION DE SERVIDORES',5,1,0011)," +
+                    "(80634,'TECO','HABILIDADES DIRECTIVAS',5,1,0012)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0013)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0014)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0015)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0016)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0017)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0018)," +
+                    "(73282,'TECO','TECNOLOGIAS DE LA INFORMACION PARA LA INNOVACION',1,1,0019)," +
+                    "(73273,'TECO','HABILIDADES DEL PENSAMIENTO',1,2,0006)"+";");
+
+
 
             Toast.makeText(this,"insertados",Toast.LENGTH_LONG).show();
             db.setTransactionSuccessful();
@@ -188,8 +205,136 @@ public class MainActivity extends AppCompatActivity {
         db.beginTransaction();
         try{
             db.execSQL("insert into Academico(NUMPERSONAL, ACADEMICO, APELLIDOPATERNO, APELLIDOMATERNO) values" +
-                    "(0001,'MARIBEL','CARMONA','GARCIA')," +
-                    "(0002,'JOSE JUAN','MUÑOZ','LEON');");
+                    "(0001,'EVERARDO FRANCISCO','GARCIA','MENIER')," +
+                    "(0002,'JUAN MANUEL','GUTIERREZ','MENDEZ')," +
+                    "(0003,'OSCAR','ALONSO','RAMIREZ')," +
+                    "(0004,'EDSEL','ORTIZ','ROMERO'),"+
+                    "(0005,'MARIA DEL CARMEN','MEZURA','GODOY')," +
+                    "(0006,'PATRICIA','GONZALEZ','GASPAR')," +
+                    "(0007,'CARLOS','ILLESCAS','SANCHEZ')," +
+                    "(0008,'ARMINDA','BARRADAS','SANCHEZ')," +
+                    "(0009,'EDGAR IVAN','BENITEZ','GUERRERO')," +
+                    "(0010,'MARTHA PATRICIA','RODRIGUEZ','GUZMAN')," +
+                    "(0011,'JESUS ROBERTO','MENDEZ','ORTIZ')," +
+                    "(0012,'AQUILES','ORDUÑA','GONZALEZ')," +
+                    "(0013,'RUTH','RODRIGUEZ','RAMIREZ')," +
+                    "(0014,'LORENA','ALONSO','RAMIREZ')," +
+                    "(0015,'MARIBEL','CARMONA','GARCIA')," +
+                    "(0016,'MARIA DE LOURDES','HERNANDEZ','RODRIGUEZ')," +
+                    "(0017,'MARIA DE LOS ANGELES','NAVARRO','GUERRERO')," +
+                    "(0018,'VICTOR MANUEL','HERNANDEZ','OLIVERA')," +
+                    "(0019,'FREDY','CASTAÑEDA','SANCHEZ')," +
+                    "(0020,'PATRICIA','DIAZ','GASPAR')," +
+                    "(0021,'CRISTHIAN','PEREZ','SALAZAR')," +
+                    "(0022,'ULISES','MARINERO','AGUILAR')," +
+                    "(0023,'OSCAR','ALONSO','RAMIREZ')," +
+                    "(0024,'JOSE RAFAEL','ROJANO','CACERES')," +
+                    "(0025,'MARIA DOLORES','VARGAS','CARDAN')," +
+                    "(0026,'ERIKA','MENESES','RICO')," +
+                    "(0027,'JOSE GUILLERMO','HERNANDEZ','CALDERON'),n" +
+                    "(0028,'MARIA LUISA','CORDOBA','TLAXCALTECO')," +
+                    "(0029,'ALFONSO','SANCHEZ','OREA')," +
+                    "(0030,'LUIS GERARDO','MONTANE','JIMENEZ')," +
+                    "(0031,'DIANA ELIZABETH','VALDERRABANO','PEDRAZA')," +
+                    "(0032,'MARGARITA EDITH','CANAL','MARTINEZ')," +
+                    "(0033,'ALICIA YAZMIN','ROJAS','LUNA')," +
+                    "(0034,'RAMON DAVID','SARMIENTO','CERVANTES')," +
+                    "(0035,'ITZEL ALESSANDRA','REYES','FLORES')," +
+                    "(0036,'MAX WILLIAM','MILLAN','MARTINEZ')," +
+                    "(0037,'NIELS','MARTINEZ','GUEVARA')," +
+                    "(0038,'RAMON','GOMEZ','ROMERO')," +
+                    //MAESTROS REDES
+                    "(0039,'JAVIER','SANCHEZ','ACOSTA')," +
+                    "(0040,'MARIA','DE','LOS','ANGELES','ARENAS','VALDES')," +
+                    "(0041,'ROSELIA','OSORIO','ARMENTA')," +
+                    "(0042,'ALFONSO','DURAN','HERMANEZ')," +
+                    "(0043,'MARTHA','ELIZABETH','DOMINGUEZ',''BARCENAS)," +
+                    "(0044,'DIANA','ELIZABETH','DOMINGUEZ','BARCENAS')," +
+                    "(0045,'DIANA','ELIZABETH','VALDERRABANO','PEDRAZA')," +
+                    "(0046,'VIRGINIA','LAGUNES','BARRADAS')," +
+                    "(0047,'ARMINDA','SANCHEZ','BARRADAS')," +
+                    "(0048,'LORENA','ALONSO','RAMIREZ')," +
+                    "(0049,'AQUILES','ORDINA','GONZALEZ')," +
+                    "(0050,'PATRICIA','GONZALEZ','GASPAR')" +
+                    "(0051,'VICTOR','MANUEL','TAPLA','CARRERA')," +
+                    "(0052,'JORGE','OCTAVIO','OCHARAN','HERNNADEZ')," +
+                    "(0053,'MARIA','DOLORES','VARGAS','CERDAN')," +
+                    "(0054,'GERARDO','CONTRERAS','VEGA')," +
+                    "(0055,'JUAN','LUIS','LOPEZ','HERRERA')," +
+                    "(0056,'LUIS','JACOBO','PEREZ','GUERRERO')," +
+                    "(0057,'URBANO','FRANCISCO','ORTEGA','MENDEZ')," +
+                    "(0058,'MARIA','SILVANA','GARCIA','RAMIREZ')," +
+                    "(0059,'HECTOR','XAVIER','RIAÑO')," +
+                    "(0060,'ERIKA','MENESES','RICO')," +
+                    "(0061,'WILLIAN','ZARATE','RAMIREZ')," +
+                    "(0062,'EZZIO','OTHONIEL','ACOSTA','CANSECO')," +
+                    "(0063,'OSCAR','ALONSO','RAMIREZ')," +
+                    "(0064,'ANGELICA','PEREZ','HERNANDES')," +
+                    "(0065,'LUIS','JACOBO','PEREZ','GUERRERO')," +
+                    "(0066,'HECTOR','XAVIER','LIMON','RIAÑO')," +
+                    "(0067,'ALBERTO','CRUZ','LANDA')" +
+                    "(0068,'JUAN','MANUEL','GUTIERREZ',''MENDEZ')," +
+                    "(0069,'CARLOS','ALBERTO','OCHOA','RIVERA')," +
+                    "(0070,'MIGUEL','ANGEL','ORTIGOZA','CLEMENTE')," +
+                    //TECNOLOGIAS
+                    "(0071,'JULIÁN','FELIPE','DÍAZ','CAMACHO')," +
+                    "(0072,'GUSTAVO','PADRON','ARRIAGA')," +
+                    "(0073,'IRMA','ELIZABETH','ROMERO','ARRIOJA')," +
+                    "(0074,'JORGE','OCTAVIO','OCHARAN','HERNANDEZ')," +
+                    "(0075,'KARLA','PAOLA','MARTINEZ','RAMILA')," +
+                    "(0076,'ANGEL','JUAN','SANCHEZ','GARCIA')," +
+                    "(0077,'JUAN','CARLOS','PEREZ','ARRIAGA')," +
+                    "(0078,'CARLOS','GARCÍA','TRUJILLO')," +
+                    "(0079,'SAUL','DOMINGUEZ','ISIDRO')," +
+                    "(0080,'JOSE','EFRAIN','MONTERO','MORA')," +
+                    "(0081,'DONAJI','CALLEJAS','DEL','CALLEJO')," +
+                    "(0082,'VIRGINIA','ANGELICA','GARCIA','VEGA')," +
+                    "(0083,'URBANO','FRANCISCO','ORTEGA','RIVERA')," +
+                    //ESTADISTICA
+                    "(0084,'JOSÉ','FABIÁN','MUÑOZ','PORTILLA')," +
+                    "(0085,'ANA','YAZMÍN','VIVEROS','GARCÍA')," +
+                    "(0086,'LORENA','LÓPE','LOZADA')," +
+                    "(0087,'ANABELL','YENELLY','RAMÍRE','JIMÉNEZ')," +
+                    "(0088,'ELISEO','GABRIEL','ARGÜELLES')," +
+                    "(0089,'CLAUDIO','RAFAEL','CASTRO','LÓPEZ')," +
+                    "(0090,'MIGUEL','ALONSO','LÓPEZ')," +
+                    "(0091,'CECILIA','CRUZ','LÓPEZ')," +
+                    "(0092,'PATRICIA','GARCÍA','SÁNCHEZ')," +
+                    "(0093,'JESÚS','HERNÁNDEZ','SUÁREZ')," +
+                    "(0094,'JOSÉ','JUAN','MUÑOZ','LEÓN')," +
+                    "(0095,'MARÍA','DE','LOURDES','VELASCO','VÁZQUEZ')," +
+                    "(0096,'JULIÁN','FELIPE','DÍAZ','CAMACHO')," +
+                    "(0097,'YESENIA','ZAVALETA','SÁNCHEZ')," +
+                    "(0098,'NORA','GUADALUPE','SÁNCHEZ','MONTERO')," +
+                    "(0099,'MARIO','ALBERTO','HERNANDEZ','PEREZ')," +
+                    "(0100,'JUDITH','GUADALUPE','MONTERO','MORA')," +
+                    "(0101,'GUSTAVO','ADOLFO','REYES','AGUILAR')," +
+                    "(0102,'ZOYLO','MORALES','ROMERO')," +
+                    "(0103,'MIGUEL','ALONSO','LÓPEZ')," +
+                    "(0104,'JUDITH','RODRÍGUEZ','CUEVAS')," +
+                    "(0105,'EDUARDO','DÍAZ','CAMACHO')," +
+                    "(0106,'JOSE','LUIS','COLORADO','HERNÁNDEZ')," +
+                    "(0107,'JOSÉ','FABIÁN','MUÑOZ','PORTILLA')," +
+                    "(0108,'MINERVA','REYES','FÉLIX')," +
+                    "(0109,'ROBERTO','LARA','DOMÍNGUEZ')," +
+                    "(0110,'ANABELL','YENELLY','RAMÍREZ','JIMÉNEZ')," +
+                    "(0111,'ABIEL','GERARDO','SANTOS','HERNÁNDEZ')," +
+                    "(0112,'JUAN','CARLOS','GARCIA','RODRÍGUEZ')," +
+                    "(0113,'ÁNGEL','FERNANDO','ARGÜELLO','ORTIZ')," +
+                    "(0114,'RAÚL','DE','LA','FUENTE','IZAGUIRRE')," +
+                    "(0115,'ÁNGEL','MIÑON','PÉREZ')," +
+                    "(0116,'ZOYLO','MORALES','ROMERO')," +
+                    "(0117,'NORA','GUADALUPE','SÁNCHEZ','MONTERO')," +
+                    "(0118,'EDNA','LILLIAM','MENDOZA','SOLIS')," +
+                    "(0119,'JESÚS','HERNÁNDEZ','SUÁREZ')," +
+                    "(0120,'AURELIANO','AGUILAR','BONILLA')," +
+                    "(0121,'JUAN','RUIZ','RAMÍREZ')," +
+                    "(0122,'JULIA','AURORA','MONTANO','RIVAS')," +
+                    "(0123,'ALMA','ROSA','CORDOVA','AGUILAR')," +
+                    "(0124,'RUTH','ELIZABETH','ALDAMA','ROSAS')," +
+                    "(0125,'VÍCTOR','MANUEL','MÉNDEZ','SÁNCHEZ')," +
+                    "(0126,'JESUS','ADOLFO','MEJIA','DE','DIOS')," +
+                    "(0127,'JOSÉ','ISAÍAS','SILICEO','MURRIETA'),"+";");
 
             db.setTransactionSuccessful();
         }catch(SQLiteException e){
@@ -197,7 +342,6 @@ public class MainActivity extends AppCompatActivity {
         }finally {
             db.endTransaction();
         }
-
     }
 
     private void insertarHorario(){
