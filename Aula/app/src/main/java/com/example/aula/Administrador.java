@@ -15,22 +15,22 @@ public class Administrador extends AppCompatActivity {
     }
 
     public void registroSalon(View view){
-        Intent salon = new Intent(this,RegistroSalon.class);
-        startActivity(salon);
+        Intent ventanaSalon = new Intent(this,RegistroSalon.class);
+        startActivity(ventanaSalon);
     }
 
     public void registroAcademico(View view){
-        Intent academico = new Intent(this, ResgistroAcademico.class);
-        startActivity(academico);
+        Intent ventanaAcademico = new Intent(this, ResgistroAcademico.class);
+        startActivity(ventanaAcademico);
     }
 
     public void resgistroMateria(View view){
-        Intent materia = new Intent(this,RegistroMateria.class);
-        startActivity(materia);
+        Intent ventanaMateria = new Intent(this,RegistroMateria.class);
+        startActivity(ventanaMateria);
     }
 
     public void registroHorario(View view){
-        Intent hora = new Intent(this,RegistroHorario.class);
-        startActivity(hora);
+        Intent ventanaHorario = new Intent(this,RegistroHorario.class);
+        startActivity(ventanaHorario);
     }
 }

@@ -14,9 +14,19 @@ public class AdministradorEditar extends AppCompatActivity {
         setContentView(R.layout.activity_administrador_editar);
     }
 
-    public void editarAcademico(View view){
+    public void editarMateria(View view){
         //corregir la clase editar materia
-        Intent editarAca = new Intent(this, EditarMateria.class);
-        startActivity(editarAca);
+        Intent ventanaEditarMateria = new Intent(this, EditarMateria.class);
+        startActivity(ventanaEditarMateria);
+    }
+
+    public void editarAcademico(View view){
+        Intent  ventanaEditarAcademico= new Intent(this, EditarAcademico.class);
+        startActivity(ventanaEditarAcademico);
+    }
+
+    public void editarSalon(View view){
+        Intent ventanaEditarSalon = new Intent(this, EditarSalon.class);
+        startActivity(ventanaEditarSalon);
     }
 }

@@ -24,6 +24,7 @@
         android:layout_marginTop="64dp"
         android:backgroundTint="#2196F3"
         android:contentDescription="@string/profesor"
+        android:onClick="eliminarAcademico"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/icons8_school_director_male_skin_type_6_64" />
@@ -36,7 +37,7 @@
         android:layout_marginEnd="64dp"
         android:backgroundTint="#2196F3"
         android:contentDescription="@string/salon"
-        android:onClick="registroSalon"
+        android:onClick="eliminarSalon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/icons8_classroom_64" />
@@ -49,6 +50,7 @@
         android:layout_marginTop="76dp"
         android:backgroundTint="#2196F3"
         android:contentDescription="@string/materia"
+        android:onClick="eliminarMateria"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:srcCompat="@drawable/icons8_address_book_64" />
@@ -61,6 +63,7 @@
         android:layout_marginEnd="60dp"
         android:backgroundTint="#2196F3"
         android:contentDescription="@string/hora"
+        android:onClick="eliminarHorario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
         app:srcCompat="@drawable/icons8_timetable_48" />

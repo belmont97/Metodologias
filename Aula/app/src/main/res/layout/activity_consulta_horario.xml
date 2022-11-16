@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Consulta_Salon">
+    tools:context=".Consulta_Horario">
 
     <EditText
-        android:id="@+id/consultar"
+        android:id="@+id/editTextTime3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
-        android:hint="Nombre"
-        android:inputType="textPersonName"
+        android:hint="Hora"
+        android:inputType="time"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
     <LinearLayout
         android:layout_width="394dp"
         android:layout_height="392dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="52dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/consultar">
+        app:layout_constraintTop_toBottomOf="@+id/editTextTime3">
 
         <TextView
             android:id="@+id/mostrar"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginTop="24dp"
-        android:text="Busqueda por Academico: "
+        android:text="Busqueda por Horario: "
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
