@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarHorario">
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="89dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icons8_clock_80" />
+
+    <ImageButton
+        android:id="@+id/imageButton18"
+        android:layout_width="62dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/boton_radio"
+        android:backgroundTint="#00AA4F"
+        android:contentDescription="atras"
+        android:onClick="botonAtras"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout16"
+        android:layout_width="382dp"
+        android:layout_height="565dp"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10">
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Ingresa los datos siguientes: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="NRC: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/idNRC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ejemplo: 85555"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Número de Salón:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/idSalon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ejemplo: 104"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/textView52"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="282dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Lunes:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/idLunes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Ejemplo: 09:00-11:00"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/textView48"
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Martes:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/idMartes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Ejemplo: 09:00-11:00"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/textView49"
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Miercoles:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/idMiercoles"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Ejemplo: 09:00-11:00"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView50"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Jueves:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/idJueves"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Ejemplo: 09:00-11:00"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/textView51"
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="Viernes: "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/idViernes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Ejemplo: 09:00-11:00"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="281dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="27dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout16">
+
+        <Button
+            android:id="@+id/idagregarHorario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/boton_radio"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Agregar"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditarSalon">
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="96dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="Salon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icons8_school_64" />
+
+    <ImageButton
+        android:id="@+id/imageButton17"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/boton_radio"
+        android:backgroundTint="#00AA4F"
+        android:contentDescription="atras"
+        android:onClick="botonAtras"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/homeAsUpIndicator" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout15"
+        android:layout_width="387dp"
+        android:layout_height="412dp"
+        android:layout_marginTop="11dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9">
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Ingresa los datos siguientes: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Número de Salón"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/idNumSalon"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Ejemplo: 104"
+                android:inputType="textPersonName"
+                android:minHeight="60sp" />
+
+            <ImageButton
+                android:id="@+id/btBuscarSalon"
+                android:layout_width="63dp"
+                android:layout_height="48dp"
+                android:background="@drawable/boton_radio"
+                android:baselineAligned="false"
+                android:contentDescription="buscar"
+                android:scaleType="fitCenter"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Edificio:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <RadioGroup
+            android:id="@+id/idEdificios"
+            android:layout_width="match_parent"
+            android:layout_height="121dp">
+
+            <RadioButton
+                android:id="@+id/idEconex"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="ECONEX"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/idFei"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="FEI"
+                android:textSize="18sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="271dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="36dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout15">
+
+        <Button
+            android:id="@+id/btAgregarSalon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/boton_radio"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Guardar"
+            android:textSize="18sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

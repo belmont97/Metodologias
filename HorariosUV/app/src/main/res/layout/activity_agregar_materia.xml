@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarMateria">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="94dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icons8_book_64" />
+
+    <ImageButton
+        android:id="@+id/imageButton15"
+        android:layout_width="67dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/boton_radio"
+        android:backgroundTint="#00AA4F"
+        android:contentDescription="atras"
+        android:onClick="botonAtras"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/homeAsUpIndicator" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout14"
+        android:layout_width="392dp"
+        android:layout_height="581dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8">
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Ingresa los datos siguientes: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="NRC: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/editIdNRC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ejemplo: 80785"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Carrera:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/editIdCarrera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ejemplo: TECO"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Experiencia Educativa:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/editIdEE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ejemplo: PROGRAMACION"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Bloque: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/editIdBloque"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ejemplo: 1, 3, 5 o 7"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Sección: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/editIdSeccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Eejemplo: 1, 2 o 3"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Número Personal: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/editIdPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="(IDPERSONAL profesor) Ejemplo: 0123"
+            android:inputType="number"
+            android:minHeight="48dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="287dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+        <Button
+            android:id="@+id/btAgregarMateria"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/boton_radio"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Agregar"
+            android:textSize="18sp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
