@@ -36,13 +36,17 @@ public class ConsultaHorarios extends AppCompatActivity {
                     String hora = buscarHorario.getText().toString();
                     database = SQLiteDatabase.openDatabase(baseDatos,null,SQLiteDatabase.OPEN_READONLY);
                     try {
-                        String carrera,ee,lunes,martes,miercoles,jueves,viernes;
+                        String carrera,ee,NOMText,APEPText,APMText,salon,lunes,martes,miercoles,jueves,viernes;
                         mostrar.setText("");
-                        String sql = "select CARRERA,EE,LUNES,MARTES,MIERCOLES,JUEVES,VIERNES from Materias m INNER JOIN Horario h ON m.NRC = h.IDNRC WHERE h.Lunes='"+hora+"' or h.MARTES='" + hora+"' or h.MIERCOLES='" + hora+ "' or h.JUEVES='" + hora +"' or h.VIERNES='" + hora +"';";
+                        String sql = "select CARRERA,EE,NOMBRE,APELLIDOPATERNO,APELLIDOMATERNO,IDSALON,LUNES,MARTES,MIERCOLES,JUEVES,VIERNES from Materias m INNER JOIN Academico AS a ON m.IDPERSONAL=a.NUMPERSONAL INNER JOIN Horario h ON m.NRC = h.IDNRC WHERE h.Lunes='"+hora+"' or h.MARTES='" + hora+"' or h.MIERCOLES='" + hora+ "' or h.JUEVES='" + hora +"' or h.VIERNES='" + hora +"';";
                         Cursor c = database.rawQuery(sql, null);
 
                         int carreraEntero = c.getColumnIndex("CARRERA");
                         int eeEntero = c.getColumnIndex("EE");
+                        int NOM= c.getColumnIndex("NOMBRE");
+                        int APEP = c.getColumnIndex("APELLIDOPATERNO");
+                        int APEM = c.getColumnIndex("APELLIDOMATERNO");
+                        int salonInt = c.getColumnIndex("IDSALON");
                         int lunesEntero = c.getColumnIndex("LUNES");
                         int martesEntero = c.getColumnIndex("MARTES");
                         int miercolesEntero = c.getColumnIndex("MIERCOLES");
@@ -52,13 +56,17 @@ public class ConsultaHorarios extends AppCompatActivity {
                         while(c.moveToNext()){
                             carrera = c.getString(carreraEntero);
                             ee = c.getString(eeEntero);
+                            NOMText = c.getString(NOM);
+                            APEPText = c.getString(APEP);
+                            APMText = c.getString(APEM);
+                            salon = c.getString(salonInt);
                             lunes = c.getString(lunesEntero);
                             martes = c.getString(martesEntero);
                             miercoles = c.getString(miercolesEntero);
                             jueves = c.getString(juevesEntero);
                             viernes = c.getString(viernesEntero);
 
-                            mostrar.append("\nCARRERA: " + carrera + "\nMATERIA: " + ee + "\nLUNES: " + lunes + "\nMARTES: " + martes + "\nMIERCOLES: "+ miercoles + "\nJUEVES: "+ jueves + "\nVIERNES: " + viernes + "\n");
+                            mostrar.append("\nCARRERA: " + carrera + "\nMATERIA: " + ee + "\nACADÉMICO: "+ NOMText+" "+APEPText+" "+APMText +"\nSALON: "+ salon+ "\nLUNES: " + lunes + "\nMARTES: " + martes + "\nMIERCOLES: "+ miercoles + "\nJUEVES: "+ jueves + "\nVIERNES: " + viernes + "\n");
                         }
 
                     }catch (Exception e){

@@ -37,21 +37,33 @@ public class ConsultaMateria extends AppCompatActivity{
                     try {
                         Materia = buscarMateria.getText().toString();
                         mostrar.setText("");
-                        String NOMText, APEPText, APMText,salon;
-                        String sql = "select NOMBRE,APELLIDOPATERNO,APELLIDOMATERNO,IDSALON from Materias AS m INNER JOIN Academico AS a ON m.IDPERSONAL=a.NUMPERSONAL INNER JOIN MateriaSalon AS mn ON m.NRC = mn.IDNRC where m.EE = '" + Materia +"';";
+                        String CarreText,NumText,NOMText, APEPText, APMText,salon,lunes,martes,miercoles,jueves,viernes;
+                        String sql = "select CARRERA,NOMBRE,APELLIDOPATERNO,APELLIDOMATERNO,IDSALON,LUNES,MARTES,MIERCOLES,JUEVES,VIERNES from Materias AS m INNER JOIN Academico AS a ON m.IDPERSONAL=a.NUMPERSONAL INNER JOIN Horario AS h ON m.NRC=h.IDNRC where m.EE = '" + Materia +"';";
                         Cursor c = database.rawQuery(sql,null);
 
+                        int carre = c.getColumnIndex("CARRERA");
                         int NOM= c.getColumnIndex("NOMBRE");
                         int APEP = c.getColumnIndex("APELLIDOPATERNO");
                         int APEM = c.getColumnIndex("APELLIDOMATERNO");
                         int idsalon = c.getColumnIndex("IDSALON");
+                        int lunesInt = c.getColumnIndex("LUNES");
+                        int martesInt = c.getColumnIndex("MARTES");
+                        int miercolesInt = c.getColumnIndex("MIERCOLES");
+                        int juevesInt = c.getColumnIndex("JUEVES");
+                        int viernesInt = c.getColumnIndex("VIERNES");
 
                         while (c.moveToNext()){
+                            CarreText = c.getString(carre);
                             NOMText = c.getString(NOM);
                             APEPText = c.getString(APEP);
                             APMText = c.getString(APEM);
                             salon = c.getString(idsalon);
-                            mostrar.append("\nACADÉMICO: " +NOMText + "\nAPELLIDO PATERNO: "+APEPText + "\nAPELLIDO MATERNO: "+ APMText + "\nSALÓN: " + salon +  "\n");
+                            lunes = c.getString(lunesInt);
+                            martes = c.getString(martesInt);
+                            miercoles = c.getString(miercolesInt);
+                            jueves = c.getString(juevesInt);
+                            viernes = c.getString(viernesInt);
+                            mostrar.append("\nCARRERA: " + CarreText +"\n"+"ACADÉMICO: " +NOMText + " "+APEPText + " "+ APMText + "\nSALÓN: " + salon +  "\n"+"LUNES: "+lunes+"\n"+"MARTES: "+martes+"\n"+"MIERCOLES: "+ miercoles+"\n"+"JUEVES: "+jueves+"\n"+"VIERNES: "+viernes+"\n");
                         }
 
                     }catch (Exception e){

@@ -31,26 +31,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_carga);
 
         try {
+            if(!(checkDatabase2(datosUV))){
+                createDatabaseAdmins(ubicacion);
+                createTableAdmins();
+                insertarDatosAdmins();
+
+                createDatabaseUV(datosUV);
+                dropTable();
+                createTablas();
+                insertarDatosMaterias();
+                insertarDatosSalon();
+                insertarDatosAcademico();
+                insertarDatosHorario();
+                insertDatosMateriaSalon();
+                insertdatosAcademicoSalon();
+
                 Toast.makeText(this, "Cargando...", Toast.LENGTH_SHORT).show();
-
-                    createDatabaseAdmins(ubicacion);
-                    createTableAdmins();
-                    insertarDatosAdmins();
-
-                    createDatabaseUV(datosUV);
-                    createTablas();
-                    insertarDatosMaterias();
-                    insertarDatosSalon();
-                    insertarDatosAcademico();
-                    insertarDatosHorario();
-                    insertDatosMateriaSalon();
-                    insertdatosAcademicoSalon();
-
-
-
-
-
-
+            }else {
+                Toast.makeText(this, "Cargando...", Toast.LENGTH_SHORT).show();
+            }
 
             Toast.makeText(this, "Cargando...", Toast.LENGTH_SHORT).show();
 
@@ -74,31 +73,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkDataBase(String Database_path) {
+        SQLiteDatabase check = null;
         try {
-            database = SQLiteDatabase.openDatabase(Database_path, null, SQLiteDatabase.OPEN_READONLY);
-
+            check = SQLiteDatabase.openDatabase(Database_path, null, SQLiteDatabase.OPEN_READONLY);
+            check.close();
         } catch (SQLiteException e) {
             //Log.e("Error", "No existe la base de datos " ,null);
         }
-        return database != null;
+        return check != null;
     }
 
     private boolean checkDatabase2(String Database_path){
+        SQLiteDatabase check = null;
         try {
-            admins = SQLiteDatabase.openDatabase(Database_path, null, SQLiteDatabase.OPEN_READONLY);
-
+            check = SQLiteDatabase.openDatabase(Database_path, null, SQLiteDatabase.OPEN_READONLY);
+            check.close();
         }catch (SQLiteException e){
 
         }
-
-        return admins != null;
+        return check != null;
     }
 
 
     private void createDatabaseUV(String database_path){
         try {
             database = SQLiteDatabase.openDatabase(database_path,null,SQLiteDatabase.CREATE_IF_NECESSARY);
-            Toast.makeText(this, "DatabaseUv creada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cargando...", Toast.LENGTH_SHORT).show();
         }catch (SQLiteException e){
             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
         }
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     private void createDatabaseAdmins(String database_path){
         try {
             admins = SQLiteDatabase.openDatabase(database_path,null,SQLiteDatabase.CREATE_IF_NECESSARY);
-            Toast.makeText(this, "Database admins creada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cargando...", Toast.LENGTH_SHORT).show();
         }catch (SQLiteException e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         admins.beginTransaction();
         try {
             admins.execSQL("create table Admins(USUARIO text not null, PASSSWORD integer not null, primary key(USUARIO));");
-            Toast.makeText(this, "Tabla admins creada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cargando...", Toast.LENGTH_SHORT).show();
             admins.setTransactionSuccessful();
         }catch (SQLiteException e){
 
@@ -141,9 +141,9 @@ public class MainActivity extends AppCompatActivity {
             database.execSQL(" drop table Horario;");
 
             database.setTransactionSuccessful();
-            Toast.makeText(this,"Tablas eliminadas",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"",Toast.LENGTH_LONG).show();
         }catch(SQLiteException e){
-            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"",Toast.LENGTH_LONG).show();
         }finally {
             database.endTransaction();
         }
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     "('S19016410',19016410),"+
                     "('S19030171',19030171),"+
                     "('S20018150',20018150)"+";");
-            Toast.makeText(this,"insertados",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Cargando Datos...",Toast.LENGTH_LONG).show();
             admins.setTransactionSuccessful();
         }catch (SQLiteException e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this,"Creado",Toast.LENGTH_LONG).show();
 
             database.setTransactionSuccessful();
-            Toast.makeText(this, "Tablas creadas",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cargando Datos...",Toast.LENGTH_SHORT).show();
         }catch(SQLException e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
         }finally {
@@ -336,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
     public void insertdatosAcademicoSalon(){
         database.beginTransaction();
         try {
-            //Estadistica
+            //ESTADÍSTICA
             database.execSQL("insert into AcademicoSalon(IDPERSONAL,IDSALON) values" +
                     "(0001,'104'),"+
                     "(0001,'F403'),"+
@@ -725,7 +725,7 @@ public class MainActivity extends AppCompatActivity {
                     "(0123,'F402'),"+
                     "(0123,'104')"+";");
 
-            Toast.makeText(this, "Bientso 2", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cargando Datos...", Toast.LENGTH_SHORT).show();
             database.setTransactionSuccessful();
         }catch (Exception e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
@@ -737,7 +737,7 @@ public class MainActivity extends AppCompatActivity {
     public void insertDatosMateriaSalon(){
         database.beginTransaction();
         try {
-            //Datos Ingenieria de software
+            //Datos INGENIERÍA de software
             //Bloque 1
             //Seccion 1
             database.execSQL("insert into MateriaSalon(IDNRC,IDSALON) values" +
@@ -876,7 +876,7 @@ public class MainActivity extends AppCompatActivity {
                     "(83507,'111'),"+
                     "(83507,'105'),"+
 
-            //TECNOLOGIAS COMPUTACIONALES
+            //TECNOLOGÍAS COMPUTACIÓNALES
             //BLOQUE 1
             //SECCION 1
                     "(73282,'103'),"+
@@ -1105,7 +1105,7 @@ public class MainActivity extends AppCompatActivity {
             //SECCION 4
                     "(91570,'F404'),"+
 
-            //ESTADISTICA
+            //ESTADÍSTICA
             //BLOQUE 1
             //SECCION 1
 
@@ -1276,7 +1276,7 @@ public class MainActivity extends AppCompatActivity {
                     "(20811,'F103'),"+
                     "(21493,'112'),"+
                     "(21493,'106')"+";");
-            Toast.makeText(this, "Agregado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cargando Datos...", Toast.LENGTH_SHORT).show();
             database.setTransactionSuccessful();
         }catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -1316,7 +1316,7 @@ public class MainActivity extends AppCompatActivity {
                     "('103','ECONEX'),"+
                     "('CDS','FEI')"+";");
 
-            Toast.makeText(this, "Agregados exitosamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cargando Datos...", Toast.LENGTH_SHORT).show();
             database.setTransactionSuccessful();
         }catch(SQLiteException e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
@@ -1333,216 +1333,216 @@ public class MainActivity extends AppCompatActivity {
             //Insertar Materias de la carrera de  Ingeniería de Software
             //Seccion 1
             database.execSQL("insert into Materias(NRC,CARRERA,EE,BLOQUE,SECCION,IDPERSONAL) values" +
-                    "(72330,'ISO','FUNDAMENTOS DE MATEMATICAS',1,1,0001),"+
-                    "(73231,'ISO','INTRODUCCION A LA PROGRAMACION',1,1,0002),"+
+                    "(72230,'ISO','FUNDAMENTOS DE MATEMÁTICAS',1,1,0001),"+
+                    "(73231,'ISO','INTRODUCCIÓN A LA PROGRAMACIÓN',1,1,0002),"+
                     "(73272,'ISO','HABILIDADES DEL PENSAMIENTO',1,1,0003),"+
-                    "(96703,'ISO','LECTURA Y REDACCION',1,1,0004),"+
-                    "(73274,'ISO','INGLES I',1,1,0005),"+
-                    "(88210,'ISO','COMPUTACION BASICA',1,1,0006),"+
+                    "(96703,'ISO','LECTURA Y REDACCIÓN',1,1,0004),"+
+                    "(73274,'ISO','INGLÉS I',1,1,0005),"+
+                    "(88210,'ISO','COMPUTACIÓN BÁSICA',1,1,0006),"+
                     //Seccion 2
-                    "(72236,'ISO','FUNDAMENTOS DE MATEMATICAs',1,2,0007),"+
-                    "(73237,'ISO','INTRODUCCION A LA PROGRAMACION',1,2,0008),"+
+                    "(72236,'ISO','FUNDAMENTOS DE MATEMÁTICAS',1,2,0007),"+
+                    "(73237,'ISO','INTRODUCCIÓN A LA PROGRAMACIÓN',1,2,0008),"+
                     "(73275,'ISO','HABILIDADES DEL PENSAMIENTO',1,2,0009),"+
-                    "(96708,'ISO','LECTURA Y REDACCION',1,2,0004),"+
-                    "(73279,'ISO','INGLES I',1,2,0010),"+
-                    "(88220,'ISO','COMPUTACION BASICA',1,1,0011),"+
+                    "(96708,'ISO','LECTURA Y REDACCIÓN',1,2,0004),"+
+                    "(73279,'ISO','INGLÉS I',1,2,0010),"+
+                    "(88220,'ISO','COMPUTACIÓN BÁSICA',1,1,0011),"+
                     //Seccion 3
                     "(80555,'ISO','HABILIDADES DEL PENSAMIENTO',1,3,0012),"+
-                    "(76745,'ISO','LECTURA Y REDACIION',1,3,0013),"+
+                    "(76745,'ISO','LECTURA Y REDACCIÓN',1,3,0013),"+
 
                     //Bloque 3
                     //Seccion 1
-                    "(75641,'ISO','BASE DE DATOS',3,1,0014),"+
+                    "(75641,'ISO','BASES DE DATOS',3,1,0014),"+
                     "(75637,'ISO','ESTRUCTURAS DE DATOS',3,1,0015),"+
-                    "(75649,'ISO','PROBABILIDAD Y ESTADISTICA PARA COMPUTACION',3,1,0016),"+
-                    "(75633,'ISO','REQUERIMIENTO DE SOFTWARE',3,1,0002),"+
+                    "(75649,'ISO','PROBABILIDAD Y ESTADÍSTICA PARA COMPUTACIÓN',3,1,0016),"+
+                    "(75633,'ISO','REQUERIMIENTOS DE SOFTWARE',3,1,0002),"+
                     "(75647,'ISO','SISTEMAS OPERATIVOS',3,1,0017),"+
-                    "(75778,'ISO','PROGRAMACION',3,1,0018),"+
-                    "(12665,'ISO','ALGEBRA LINEAL PARA COMPUTACION',3,1,0019),"+
+                    "(75778,'ISO','PROGRAMACIÓN',3,1,0018),"+
+                    "(12665,'ISO','ÁLGEBRA LINEAL PARA COMPUTACIÓN',3,1,0019),"+
                     //Seccion 2
-                    "(75642,'ISO','BASE DE DATOS',3,2,0020),"+
+                    "(75642,'ISO','BASES DE DATOS',3,2,0020),"+
                     "(75640,'ISO','ESTRUCTURAS DE DATOS',3,2,0021),"+
-                    "(75650,'ISO','PROBABILIDAD Y ESTADISTICA PARA COMPUTACION',3,1,0022),"+
+                    "(75650,'ISO','PROBABILIDAD Y ESTADÍSTICA PARA COMPUTACIÓN',3,1,0022),"+
                     "(75635,'ISO','REQUERIMIENTO DE SOFTWARE',3,2,0018),"+
                     "(75648,'ISO','SISTEMAS OPERATIVOS',3,2,0023),"+
                     //Seccion 3
-                    "(95590,'ISO','BASE DE DATOS',3,3,0014),"+
+                    "(95590,'ISO','BASES DE DATOS',3,3,0014),"+
                     "(95596,'ISO','ESTRUCTURAS DE DATOS',3,3,0024),"+
-                    "(95598,'ISO','PROBABILIDAD Y ESTADISTICA PARA COMPUTACION',3,3,0001),"+
-                    "(95599,'ISO','REQUERIMIENTO DE SOFTWARE',3,3,0025),"+
+                    "(95598,'ISO','PROBABILIDAD Y ESTADÍSTICA PARA COMPUTACIÓN',3,3,0001),"+
+                    "(95599,'ISO','REQUERIMIENTOS DE SOFTWARE',3,3,0025),"+
                     "(95600,'ISO','SISTEMAS OPERATIVOS',3,3,0026),"+
                     //Bloque 5
                     //Seccion 1
-                    "(80598,'ISO','ADMINISTRACION DE PROYECTOS DE SOFTWARE',5,1,0027),"+
-                    "(80600,'ISO','DERECHO DE LAS TECNOLOGIAS DE INFORMACION Y COMUNICACION',5,1,0028),"+
+                    "(80598,'ISO','ADMINISTRACIÓN DE PROYECTOS DE SOFTWARE',5,1,0027),"+
+                    "(80600,'ISO','DERECHO DE LAS TECNOLOGÍAS DE INFORMACIÓN Y COMUNICACIÓN',5,1,0028),"+
                     "(80602,'ISO','DISEÑO DE SOFTWARE',5,1,0029),"+
                     "(80604,'ISO','PRUEBA DE SOFTWARE',5,1,0027),"+
-                    "(80606,'ISO','TECNOLOGIAS PARA LA CONSTRUCCION DE SOFTWARE',5,1,0030),"+
-                    "(80607,'ISO','PARADIGMAS DE PROGRAMACION',5,1,0031),"+
+                    "(80606,'ISO','TECNOLOGÍAS PARA LA CONSTRUCCIÓN DE SOFTWARE',5,1,0030),"+
+                    "(80607,'ISO','PARADIGMAS DE PROGRAMACIÓN',5,1,0031),"+
                     "(80610,'ISO','PRINCIPIOS DE DISEÑO DE SOFTWARE',5,1,0032),"+
-                    "(80612,'ISO','PRINCIPIOS DE CONSTRUCCION DE SOFTWARE',5,1,0033),"+
+                    "(80612,'ISO','PRINCIPIOS DE CONSTRUCCIÓN DE SOFTWARE',5,1,0033),"+
                     //Seccion 2
-                    "(80613,'ISO','ADMINISTRACION DE PROYECTOS DE SOFTWARE',5,2,0027),"+
-                    "(80615,'ISO','DERECHO DE LAS TECNOLOGIAS DE INFORMACION Y COMUNICACION',5,2,0028),"+
+                    "(80613,'ISO','ADMINISTRACIÓN DE PROYECTOS DE SOFTWARE',5,2,0027),"+
+                    "(80615,'ISO','DERECHO DE LAS TECNOLOGÍAS DE INFORMACIÓN Y COMUNICACIÓN',5,2,0028),"+
                     "(80616,'ISO','DISEÑO DE SOFTWARE',5,2,0034),"+
                     "(80617,'ISO','PRUEBA DE SOFTWARE',5,2,0035),"+
-                    "(80622,'ISO','TECNOLOGIAS PARA LA CONSTRUCCION DE SOFTWARE',5,2,0030),"+
+                    "(80622,'ISO','TECNOLOGÍAS PARA LA CONSTRUCCIÓN DE SOFTWARE',5,2,0030),"+
                     //Bloque 7
                     //Seccion 1
                     "(83492,'ISO','PROYECTO GUIADO',7,1,0034),"+
-                    "(12342,'ISO','PRACTICAS DE INGENIERIA DE SOFTWARE',7,1,0021),"+
+                    "(12342,'ISO','PRÁCTICAS DE INGENIERÍA DE SOFTWARE',7,1,0021),"+
                     "(83497,'ISO','DESARROLLO DE SISTEMAS WEB',7,1,0036),"+
                     "(83501,'ISO','DESARROLLO DE SOFTWARE',7,1,0037),"+
                     "(83503,'ISO','DESARROLLO DE APLICACIONES',7,1,0038),"+
                     "(87276,'ISO','DESARROLLO DE SISTEMAS EN RED',7,1,0038),"+
-                    "(12355,'ISO','ECONOMIA PARA LA TOMA DE DECISIONES',7,1,0039),"+
+                    "(12355,'ISO','ECONOMÍA PARA LA TOMA DE DECISIONES',7,1,0039),"+
                     "(87275,'ISO','DISEÑO DE INTERFACES DE USUARIO',7,1,0018),"+
                     "(87272,'ISO','EXPERIENCIA RECEPCIONAL',7,1,0034),"+
                     "(91336,'ISO','SERVICIO SOCIAL',7,1,0021),"+
-                    "(95601,'ISO','PRUEBAS DE PENETRACION',7,1,0040),"+
-                    "(95603,'ISO','MEDICION DE SOFTWARE',7,1,0021),"+
-                    "(12423,'ISO','ADMINISTRACION AVANZADA DE SERVICIOS',7,1,0041),"+
+                    "(95601,'ISO','PRUEBAS DE PENETRACIÓN',7,1,0040),"+
+                    "(95603,'ISO','MEDICIÓN DE SOFTWARE',7,1,0021),"+
+                    "(12423,'ISO','ADMINISTRACIÓN AVANZADA DE SERVICIOS',7,1,0041),"+
                     //Seccion 2
                     "(83504,'ISO','PROYECTO GUIADO',7,2,0042),"+
-                    "(12345,'ISO','PRACTICAS DE INGENIERIA DE SOFTWARE',7,2,0027),"+
+                    "(12345,'ISO','PRÁCTICAS DE INGENIERÍA DE SOFTWARE',7,2,0027),"+
                     "(83506,'ISO','DESARROLLO DE SISTEMAS WEB',7,2,0030),"+
-                    "(83507,'ISO','ECONOMIA PARA LA TOMA D DECISIONES',7,2,0043),"+
+                    "(83507,'ISO','ECONOMÍA PARA LA TOMA DE DECISIONES',7,2,0043),"+
 
 
-                    //Carrera de Tecnologias Computacionales
+                    //Carrera de TECNOLOGÍAS COMPUTACIÓNales
                     //Bloque 1
                     //Seccion 1
-                    "(73282,'TECO','TECNOLOGIAS DE INFORMACIÓN PARA LA INNOVACION',1,1,0044),"+
-                    "(73283,'TECO','FUNDAMENTOS DE MATEMATICAS',1,1,0045),"+
-                    "(73285,'TECO','INTRODUCCION A LA PROGRAMACION',1,1,0046),"+
+                    "(73282,'TECO','TECNOLOGÍAS DE INFORMACIÓN PARA LA INNOVACIÓN',1,1,0044),"+
+                    "(73283,'TECO','FUNDAMENTOS DE MATEMÁTICAS',1,1,0045),"+
+                    "(73285,'TECO','INTRODUCCIÓN A LA PROGRAMACIÓN',1,1,0046),"+
                     "(76830,'TECO','HABILIDADES DEL PENSAMIENTO',1,1,0047),"+
-                    "(73288,'TECO','INGLES I',1,1,0048),"+
+                    "(73288,'TECO','INGLÉS I',1,1,0048),"+
 
                     //Seccion 2
-                    "(73292,'TECO','TECNOLOGIAS DE INFORMACIÓN PARA LA INNOVACION',1,2,0014),"+
-                    "(73294,'TECO','FUNDAMENTOS DE MATEMATICAS',1,2,0049),"+
-                    "(73295,'TECO','INTRODUCCION A LA PROGRAMACION',1,2,0050),"+
+                    "(73292,'TECO','TECNOLOGÍAS DE INFORMACIÓN PARA LA INNOVACIÓN',1,2,0014),"+
+                    "(73294,'TECO','FUNDAMENTOS DE MATEMÁTICAS',1,2,0049),"+
+                    "(73295,'TECO','INTRODUCCIÓN A LA PROGRAMACIÓN',1,2,0050),"+
                     "(73897,'TECO','HABILIDADES DEL PENSAMIENTO',1,2,0051),"+
-                    "(73298,'TECO','INGLES I',1,2,0052),"+
+                    "(73298,'TECO','INGLÉS I',1,2,0052),"+
                     //Seccion 3
-                    "(81891,'TECO','TECNOLOGIAS DE INFORMACIÓN PARA LA INNOVACION',1,3,0053),"+
-                    "(81881,'TECO','FUNDAMENTOS DE MATEMATICAS',1,3,0054),"+
-                    "(81864,'TECO','INTRODUCCION A LA PROGRAMACION',1,3,0055),"+
+                    "(81891,'TECO','TECNOLOGÍAS DE INFORMACIÓN PARA LA INNOVACIÓN',1,3,0053),"+
+                    "(81881,'TECO','FUNDAMENTOS DE MATEMÁTICAS',1,3,0054),"+
+                    "(81864,'TECO','INTRODUCCIÓN A LA PROGRAMACIÓN',1,3,0055),"+
                     //Bloque 3
                     //Seccion 1
-                    "(75655,'TECO','BASE DE DATOS',3,1,0056),"+
+                    "(75655,'TECO','BASES DE DATOS',3,1,0056),"+
                     "(75667,'TECO','ESTRUCTURA DE DATOS',3,1,0057),"+
-                    "(75660,'TECO','MATEMATICAS DISCRETAS',3,1,0058),"+
-                    "(75651,'TECO','ORGANIZACION DE COMPUTADORAS',3,1,0059),"+
+                    "(75660,'TECO','MATEMÁTICAS DISCRETAS',3,1,0058),"+
+                    "(75651,'TECO','ORGANIZACIÓN DE COMPUTADORAS',3,1,0059),"+
                     "(75662,'TECO','SISTEMAS OPERATIVOS',3,1,0060),"+
-                    "(97579,'TECO','INGLES II',3,1,0061),"+
-                    "(75776,'TECO','PROBABILIDAD Y ESTADISTICA PARA COMPUTACION',3,1,0062),"+
-                    "(75774,'TECO','PROGRAMACION',3,1,0019),"+
-                    "(75775,'TECO','ALGEBRA LINEAL PARA COMPUTACION',3,1,0001),"+
+                    "(97579,'TECO','INGLÉS II',3,1,0061),"+
+                    "(75776,'TECO','PROBABILIDAD Y ESTADÍSTICA PARA COMPUTACIÓN',3,1,0062),"+
+                    "(75774,'TECO','PROGRAMACIÓN',3,1,0019),"+
+                    "(75775,'TECO','ÁLGEBRA LINEAL PARA COMPUTACIÓN',3,1,0001),"+
                     //Seccion 2
-                    "(75657,'TECO','BASE DE DATOS',3,2,0063),"+
+                    "(75657,'TECO','BASES DE DATOS',3,2,0063),"+
                     "(75668,'TECO','ESTRUCTURA DE DATOS',3,2,0064),"+
-                    "(75661,'TECO','MATEMATICAS DISCRETAS',3,2,0065),"+
-                    "(75653,'TECO','ORGANIZACION DE COMPUTADORAS',3,2,0066),"+
+                    "(75661,'TECO','MATEMÁTICAS DISCRETAS',3,2,0065),"+
+                    "(75653,'TECO','ORGANIZACIÓN DE COMPUTADORAS',3,2,0066),"+
                     "(75664,'TECO','SISTEMAS OPERATIVOS',3,2,0067),"+
-                    "(97582,'TECO','INGLES II',3,2,0068),"+
+                    "(97582,'TECO','INGLÉS II',3,2,0068),"+
                     //BLOQUE 5
                     //SECCION 1
                     "(80630,'TECO','ADMINISTRADOR DE SERVIDORES',5,1,0066),"+
-                    "(80633,'TECO','ETICA Y LEGISLACION INFORMATICA',5,1,0067),"+
+                    "(80633,'TECO','ÉTICA Y LEGISLACIÓN INFORMÁTICA',5,1,0067),"+
                     "(80634,'TECO','HABILIDADES DIRECTIVAS',5,1,0068),"+
-                    "(80637,'TECO','INTERACCION HUMANO COMPUTADORA',5,1,0044),"+
-                    "(80638,'TECO','METODOLOGIAS DE DESARROLLO',5,1,0069),"+
+                    "(80637,'TECO','INTERACCIÓN HUMANO COMPUTADORA',5,1,0044),"+
+                    "(80638,'TECO','METODOLOGÍAS DE DESARROLLO',5,1,0069),"+
                     "(80640,'TECO','SISTEMAS WEB',5,1,0070),"+
                     //SECCION 2
                     "(80675,'TECO','ADMINISTRADOR DE SERVIDORES',5,2,0066),"+
-                    "(80676,'TECO','ETICA Y LEGISLACION INFORMATICA',5,2,0071),"+
+                    "(80676,'TECO','ÉTICA Y LEGISLACIÓN INFORMÁTICA',5,2,0071),"+
                     "(80679,'TECO','HABILIDADES DIRECTIVAS',5,2,0027),"+
-                    "(80680,'TECO','INTERACCION HUMANO COMPUTADORA',5,2,0070),"+
-                    "(80685,'TECO','METODOLOGIAS DE DESARROLLO',5,2,0071),"+
+                    "(80680,'TECO','INTERACCIÓN HUMANO COMPUTADORA',5,2,0070),"+
+                    "(80685,'TECO','METODOLOGÍAS DE DESARROLLO',5,2,0071),"+
                     "(80688,'TECO','SISTEMAS WEB',5,2,0070),"+
                     //BLOQUE 7
                     //SECCION 1
-                    "(83571,'TECO','SEGURIDADA',7,1,0060),"+
+                    "(83571,'TECO','SEGURIDAD',7,1,0060),"+
                     "(83572,'TECO','PROYECTO INTEGRADOR',7,1,0020),"+
-                    "(83573,'TECO','GRAFICACION',7,1,0072),"+
+                    "(83573,'TECO','GRAFICACIÓN',7,1,0072),"+
                     "(83574,'TECO','INTERFACES DE USUARIO AVANZADAS',7,1,0018),"+
                     "(87590,'TECO','EXPERIENCIA RECEPCIONAL',7,1,0073),"+
                     "(87608,'TECO','SERVICIO SOCIAL',7,1,0069),"+
                     //SECCION 2
-                    "(83575,'TECO','INTEGRACION DE SOLUCIONES',7,2,0033),"+
+                    "(83575,'TECO','INTEGRACIÓN DE SOLUCIONES',7,2,0033),"+
                     "(83576,'TECO','SEGURIDAD',7,2,0060),"+
                     "(83577,'TECO','PROYECTO INTEGRADOR',7,2,0074),"+
-                    "(87591,'TECO','ADMINISTRACION DE BASES DE DATOS',7,2,0014),"+
-                    "(85237,'TECO','SERVICIOS DE VIRTUALIZACION',7,2,0075),"+
+                    "(87591,'TECO','ADMINISTRACIÓN DE BASES DE DATOS',7,2,0014),"+
+                    "(85237,'TECO','SERVICIOS DE VIRTUALIZACIÓN',7,2,0075),"+
                     "(19564,'TECO','EXPERIENCIA RECEPCIONAL',7,2,0019),"+
                     //SECCION 3
-                    "(98689,'TECO','INTEGRACION A SOLUCIONES',7,3,0033),"+
+                    "(98689,'TECO','INTEGRACIÓN A SOLUCIONES',7,3,0033),"+
 
                     //CARRERA DE REDES
                     //BLOQUE 1
                     //SECCION 1
 
                     "(73238,'REDES','ARQUITECTURA DE DISPOSITIVOS DE RED',1,1,0026),"+
-                    "(73239,'REDES','FUNDAMENTOS DE MATEMATICAS',1,1,0076),"+
-                    "(73241,'REDES','INTRODUCCION A LA PROGRAMACION',1,1,0002),"+
-                    "(73246,'REDES','LECTURA Y REDACCION',1,1,0077),"+
-                    "(76731,'REDES','INGLES I',1,1,0078),"+
+                    "(73239,'REDES','FUNDAMENTOS DE MATEMÁTICAS',1,1,0076),"+
+                    "(73241,'REDES','INTRODUCCIÓN A LA PROGRAMACIÓN',1,1,0002),"+
+                    "(73246,'REDES','LECTURA Y REDACCIÓN',1,1,0041),"+
+                    "(76731,'REDES','INGLÉS I',1,1,0042),"+
                     //SECCION 2
                     "(73248,'REDES','ARQUITECTURA DE DISPOSITIVOS DE RED',1,2,0079),"+
-                    "(73267,'REDES','FUNDAMENTOS DE MATEMATICAS',1,2,0061),"+
-                    "(73269,'REDES','INTROUCCION A LA PROGRAMACION',1,2,0080),"+
-                    "(73270,'REDES','LECTURA Y REDACCION',1,2,0077),"+
-                    "(73271,'REDES','INGLES I',1,2,0048),"+
+                    "(73267,'REDES','FUNDAMENTOS DE MATEMÁTICAS',1,2,0061),"+
+                    "(73269,'REDES','INTRODUCCIÓN A LA PROGRAMACIÓN',1,2,0080),"+
+                    "(73270,'REDES','LECTURA Y REDACCIÓN',1,2,0077),"+
+                    "(73271,'REDES','INGLÉS I',1,2,0048),"+
                     //SECCION 3
                     "(13434,'REDES','ARQUITECTURA DE DISPOSITIVOS DE RED',1,3,0079),"+
-                    "(13451,'REDES','FUNDAMENTOS DE MATEMATICAS',1,3,0076),"+
-                    "(13460,'REDES','INTRODUCCION A LA PROGRAMACION',1,3,0081),"+
+                    "(13451,'REDES','FUNDAMENTOS DE MATEMÁTICAS',1,3,0076),"+
+                    "(13460,'REDES','INTRODUCCIÓN A LA PROGRAMACIÓN',1,3,0081),"+
                     //BLOQUE 3
                     //SECCION 1
                     "(75723,'REDES','BASES DE DATOS',3,1,0050),"+
                     "(13468,'REDES','ESTRUCTURA DE DATOS',3,1,0053),"+
-                    "(75732,'REDES','METODOLOGIA DE LA INVESTIGACION',3,1,0068),"+
-                    "(75720,'REDES','PROGRAMACION DE SISTEMAS',3,1,0046),"+
+                    "(75732,'REDES','METODOLOGÍA DE LA INVESTIGACIÓN',3,1,0068),"+
+                    "(75720,'REDES','PROGRAMACIÓN DE SISTEMAS',3,1,0046),"+
                     "(75717,'REDES','REDES',3,1,0082),"+
-                    "(76756,'REDES','COMPUTACION BASICA',3,1,0083),"+
-                    "(95821,'REDES','PROGRAMACION',3,1,0018),"+
-                    "(98993,'REDES','HABILIDADES DEL PENSAMIENTO CRITICO Y CREATIVO',3,1,0012),"+
+                    "(76756,'REDES','COMPUTACIÓN BÁSICA',3,1,0083),"+
+                    "(95821,'REDES','PROGRAMACIÓN',3,1,0018),"+
+                    "(98993,'REDES','HABILIDADES DEL PENSAMIENTO CRÍTICO Y CREATIVO',3,1,0012),"+
                     //SECCION 2
                     "(75724,'REDES','BASES DE DATOS',3,2,0020),"+
                     "(75731,'REDES','ESTRUCTURAS DE DATOS',3,2,0019),"+
-                    "(75733,'REDES','METODOLOGIA DE LA INVESTIGACION',3,2,0119),"+
-                    "(75721,'REDES','PROGRAMACION DE SISTEMAS',3,2,0076),"+
+                    "(75733,'REDES','METODOLOGÍA DE LA INVESTIGACIÓN',3,2,0119),"+
+                    "(75721,'REDES','PROGRAMACIÓN DE SISTEMAS',3,2,0076),"+
                     "(75718,'REDES','REDES',3,2,0084),"+
-                    "(76733,'REDES','COMPUTACION BASICA',3,2,0083),"+
+                    "(76733,'REDES','COMPUTACIÓN BÁSICA',3,2,0083),"+
                     //SECCION 3
-                    "(95897,'REDES','INTRODUCCION A LA PROGRAMACION',3,3,0046),"+
+                    "(95897,'REDES','INTRODUCCIÓN A LA PROGRAMACIÓN',3,3,0046),"+
                     //BLOQUE 5
-                    "(80693,'REDES','ADMINISTRACION DE SERVIDORES',5,1,0085),"+
-                    "(80695,'REDES','ANALISIS DE PROTOCOLOS',5,1,0082),"+
+                    "(80693,'REDES','ADMINISTRACIÓN DE SERVIDORES',5,1,0085),"+
+                    "(80695,'REDES','ANÁLISIS DE PROTOCOLOS',5,1,0082),"+
                     "(80697,'REDES','ENRUTAMIENTO AVANZADO',5,1,0084),"+
-                    "(80700,'REDES','ETICA Y NORMATIVIDAD EN COMUNICACIONES Y REDES',5,1,0086),"+
-                    "(80705,'REDES','PROGRAMACION EN LA ADMINISTRACION DE REDES',5,1,0087),"+
+                    "(80700,'REDES','ÉTICA Y NORMATIVIDAD EN COMUNICACIONES Y REDES',5,1,0086),"+
+                    "(80705,'REDES','PROGRAMACIÓN EN LA ADMINISTRACIÓN DE REDES',5,1,0087),"+
                     "(80707,'REDES','SISTEMAS OPERATIVOS APLICADOS',5,1,0079),"+
                     //SECCION 2
-                    "(83555,'REDES','ADMINISTRACION DE SERVIDORES',5,2,0088),"+
-                    "(83557,'REDES','ANALISIS DE PROTOCOLOS',5,2,0023),"+
+                    "(83555,'REDES','ADMINISTRACIÓN DE SERVIDORES',5,2,0088),"+
+                    "(83557,'REDES','ANÁLISIS DE PROTOCOLOS',5,2,0023),"+
                     "(83558,'REDES','ENRUTAMIENTO AVANZADO',5,2,0088),"+
-                    "(83559,'REDES','ETICA Y NORMATIVIDAD EN COMUNICACIONES Y REDES',5,2,0086),"+
-                    "(83561,'REDES','PROGRAMACION EN LA ADMINISTRACION DE REDES',5,2,0023),"+
+                    "(83559,'REDES','ÉTICA Y NORMATIVIDAD EN COMUNICACIONES Y REDES',5,2,0086),"+
+                    "(83561,'REDES','PROGRAMACIÓN EN LA ADMINISTRACIÓN DE REDES',5,2,0023),"+
                     "(83562,'REDES','SISTEMAS OPERATIVOS APLICADOS',5,2,0023),"+
                     //BLOQUE 7
                     //SECCION 1
-                    "(83565,'REDES','PRACTICAS DE REDES',7,1,0088),"+
-                    "(83566,'REDES','ADMINISTRACION DE PROYECTOS DE RED',7,1,0086),"+
+                    "(83565,'REDES','PRÁCTICAS DE REDES',7,1,0088),"+
+                    "(83566,'REDES','ADMINISTRACIÓN DE PROYECTOS DE RED',7,1,0086),"+
                     "(83567,'REDES','DESARROLLO DE SISTEMAS WEB',7,1,0087),"+
                     "(95922,'REDES','PRUEBAS DE PENETRACION',7,1,0017),"+
-                    "(19666,'REDES','ADMINISTRACION EN BASES DE DATOS',7,1,0036),"+
+                    "(19666,'REDES','ADMINISTRACIÓN EN BASES DE DATOS',7,1,0036),"+
                     //SECCION 2
-                    "(87500,'REDES','PRACTICAS DE REDES',7,2,0079),"+
-                    "(87503,'REDES','ADMINISTRACION DE PROYECTOS DE RED',7,2,0041),"+
+                    "(87500,'REDES','PRÁCTICAS DE REDES',7,2,0079),"+
+                    "(87503,'REDES','ADMINISTRACIÓN DE PROYECTOS DE RED',7,2,0041),"+
                     "(87504,'REDES','DESARROLLO DE SISTEMAS WEB',7,2,0081),"+
-                    "(19469,'REDES','ANALISIS FORENSE PARA SISTEMAS DE ESCRITORIO',7,2,0040),"+
+                    "(19469,'REDES','ANÁLISIS FORENSE PARA SISTEMAS DE ESCRITORIO',7,2,0040),"+
                     //BLOQUE 9
                     // SECCION 1
                     "(87507,'REDES','EXPERIENCIA RECEPCIONAL',9,1,0020),"+
@@ -1550,110 +1550,110 @@ public class MainActivity extends AppCompatActivity {
                     //SECCION 2
                     "(91570,'REDES','EXPERIENCIA RECEPCIONAL',9,2,0087),"+
 
-                    //CARRERA ESTADISTICA
+                    //CARRERA ESTADÍSTICA
                     //BLOQUE 1
                     //SECCION 1
 
-                    "(85505,'ESTADISTICA','ALGEBRA LINEAL APLICADA A LA ESTADISTICA I',1,1,0007),"+
-                    "(85506,'ESTADISTICA','CALCULO APLICADO A LA ESTADISTICA I',1,1,0090),"+
-                    "(85507,'ESTADISTICA','METODOLOGIA ESTADISTICA PARA LA INVESTIGACION',1,1,0054),"+
-                    "(85508,'ESTADISTICA','ESTADISTICA DESCRIPTIVA Y EXPLORATORIA',1,1,0091),"+
-                    "(85511,'ESTADISTICA','LITERACIDAD DIGITAL',1,1,0092),"+
-                    "(85515,'ESTADISTICA','LENGUA I',1,1,0093),"+
-                    "(85524,'ESTADISTICA','LECTURA Y ESCRITURA DE TEXTOS ACADEMICOS',1,1,0094),"+
+                    "(85505,'ESTADÍSTICA','ÁLGEBRA LINEAL APLICADA A LA ESTADÍSTICA I',1,1,0007),"+
+                    "(85506,'ESTADÍSTICA','CÁLCULO APLICADO A LA ESTADÍSTICA I',1,1,0090),"+
+                    "(85507,'ESTADÍSTICA','METODOLOGÍA ESTADÍSTICA PARA LA INVESTIGACIÓN',1,1,0054),"+
+                    "(85508,'ESTADÍSTICA','ESTADÍSTICA DESCRIPTIVA Y EXPLORATORIA',1,1,0091),"+
+                    "(85511,'ESTADÍSTICA','LITERACIDAD DIGITAL',1,1,0092),"+
+                    "(85515,'ESTADÍSTICA','LENGUA I',1,1,0093),"+
+                    "(85524,'ESTADÍSTICA','LECTURA Y ESCRITURA DE TEXTOS ACADÉMICOS',1,1,0094),"+
                     //SECCION 2
-                    "(85528,'ESTADISTICA','ALGEBRA LINEAL APLICADA A LA ESTADISTICA I',1,2,0007),"+
-                    "(85531,'ESTADISTICA','CALCULO APLICADO A LA ESTADISTICA I',1,2,0095),"+
-                    "(85536,'ESTADISTICA','METODOLOGIA ESTADISTICA PARA LA INVESTIGACION',1,2,0091),"+
-                    "(85535,'ESTADISTICA','ESTADISTICA DESCRIPTIVA Y EXPLORATORIA',1,2,0096),"+
-                    "(85540,'ESTADISTICA','LITERACIDAD DIGITAL',1,2,0092),"+
-                    "(85543,'ESTADISTICA','LENGUA I',1,2,0097),"+
-                    "(85544,'ESTADISTICA','LESCUTURA Y ESCRITURA DE TEXTOS ACADEMICOS',1,2,0098),"+
+                    "(85528,'ESTADÍSTICA','ÁLGEBRA LINEAL APLICADA A LA ESTADÍSTICA I',1,2,0007),"+
+                    "(85531,'ESTADÍSTICA','CÁLCULO APLICADO A LA ESTADÍSTICA I',1,2,0095),"+
+                    "(85536,'ESTADÍSTICA','METODOLOGÍA ESTADÍSTICA PARA LA INVESTIGACIÓN',1,2,0091),"+
+                    "(85535,'ESTADÍSTICA','ESTADÍSTICA DESCRIPTIVA Y EXPLORATORIA',1,2,0096),"+
+                    "(85540,'ESTADÍSTICA','LITERACIDAD DIGITAL',1,2,0092),"+
+                    "(85543,'ESTADÍSTICA','LENGUA I',1,2,0097),"+
+                    "(85544,'ESTADÍSTICA','LECUTURA Y ESCRITURA DE TEXTOS ACADÉMICOS',1,2,0098),"+
                     //SECCION 3
-                    "(85545,'ESTADISTICA','ALGEBRA LINEAL APLICADA A LA ESTADISTICA I',1,3,0099),"+
-                    "(85556,'ESTADISTICA','CALCULO APLICADO A LA ESTADISTICA I',1,3,0100),"+
-                    "(85549,'ESTADISTICA','METODOLOGIA ESTADISTICA PARA LA INVESTIGACION',1,3,0101),"+
-                    "(85558,'ESTADISTICA','ESTADISTICA DESCRIPTIVA Y EXPLORATORIA',1,3,0102),"+
-                    "(85559,'ESTADISTICA','LITERACIDAD DIGITAL',1,3,0103),"+
-                    "(85560,'ESTADISTICA','LENGUA I',1,3,0104),"+
-                    "(85574,'ESTADISTICA','LECTURA Y ESCRITURA DE TEXTOS ACADEMICOS',1,3,0105),"+
+                    "(85545,'ESTADÍSTICA','ÁLGEBRA LINEAL APLICADA A LA ESTADÍSTICA I',1,3,0099),"+
+                    "(85556,'ESTADÍSTICA','CÁLCULO APLICADO A LA ESTADÍSTICA I',1,3,0100),"+
+                    "(85549,'ESTADÍSTICA','METODOLOGÍA ESTADÍSTICA PARA LA INVESTIGACIÓN',1,3,0101),"+
+                    "(85558,'ESTADÍSTICA','ESTADÍSTICA DESCRIPTIVA Y EXPLORATORIA',1,3,0102),"+
+                    "(85559,'ESTADÍSTICA','LITERACIDAD DIGITAL',1,3,0103),"+
+                    "(85560,'ESTADÍSTICA','LENGUA I',1,3,0104),"+
+                    "(85574,'ESTADÍSTICA','LECTURA Y ESCRITURA DE TEXTOS ACADÉMICOS',1,3,0105),"+
                     //BLOQUE 2
                     //SECCION 1
-                    "(88311,'ESTADISTICA','CALCULO APLICADO A LA ESTADISTICA II',2,1,0095),"+
-                    "(19166,'ESTADISTICA','PENSAMIENTO Y CULTURA ESTADISTICA',2,1,0106),"+
-                    "(19168,'ESTADISTICA','INTRODUCCION A LA PROGRAMACION ESTADISTICA',2,1,0058),"+
-                    "(19178,'ESTADISTICA','ALGEBRA LINEAL APLICADA A LA ESTADISTICA II',2,1,0063),"+
-                    "(20577,'ESTADISTICA','PENSAMIENTO CRITICO PARA LA SOLUCION DE PROBLEMAS',2,1,0107),"+
-                    "(20576,'ESTADISTICA','LENGUA I',2,1,0104),"+
+                    "(88311,'ESTADÍSTICA','CÁLCULO APLICADO A LA ESTADÍSTICA II',2,1,0095),"+
+                    "(19166,'ESTADÍSTICA','PENSAMIENTO Y CULTURA ESTADÍSTICA',2,1,0106),"+
+                    "(19168,'ESTADÍSTICA','INTRODUCCIÓN A LA PROGRAMACIÓN ESTADÍSTICA',2,1,0058),"+
+                    "(19178,'ESTADÍSTICA','ÁLGEBRA LINEAL APLICADA A LA ESTADÍSTICA II',2,1,0063),"+
+                    "(20577,'ESTADÍSTICA','PENSAMIENTO CRÍTICO PARA LA SOLUCIÓN DE PROBLEMAS',2,1,0107),"+
+                    "(20576,'ESTADÍSTICA','LENGUA I',2,1,0104),"+
                     //SECCION 2
-                    "(19182,'ESTADISTICA','PENSAMIENTO Y CULTURA ESTADISTICA',2,2,0106),"+
-                    "(19053,'ESTADISTICA','INTRODUCCION A LA PROGRAMACION ESTADISTICA',2,2,0075),"+
-                    "(19199,'ESTADISTICA','CALCULO APLICADO A LA ESTADISTICA II',2,2,0106),"+
-                    "(92747,'ESTADISTICA','ALGEBRA LINEAL APLICADA A LA ESTADISTICA II',2,2,0099),"+
-                    "(20578,'ESTADISTICA','PENSAMIENTO CRITICO PARA LA SOLUCION DE PROBLEMAS',2,2,0107),"+
+                    "(19182,'ESTADÍSTICA','PENSAMIENTO Y CULTURA ESTADÍSTICA',2,2,0106),"+
+                    "(19053,'ESTADÍSTICA','INTRODUCCIÓN A LA PROGRAMACIÓN ESTADÍSTICA',2,2,0075),"+
+                    "(19199,'ESTADÍSTICA','CÁLCULO APLICADO A LA ESTADÍSTICA II',2,2,0106),"+
+                    "(92747,'ESTADÍSTICA','ÁLGEBRA LINEAL APLICADA A LA ESTADÍSTICA II',2,2,0099),"+
+                    "(20578,'ESTADÍSTICA','PENSAMIENTO CRÍTICO PARA LA SOLUCIÓN DE PROBLEMAS',2,2,0107),"+
                     //BLOQUE 3
                     //SECCION 1
-                    "(87222,'ESTADISTICA','MUESTREO',3,1,0108),"+
-                    "(87224,'ESTADISTICA','MODELOS DE REGRESION LINEAL Y NO LINEAL',3,1,0109),"+
-                    "(87228,'ESTADISTICA','PROGRAMACION ESTADISTICA',3,1,0110),"+
-                    "(87235,'ESTADISTICA','PROBABILIDAD I',3,1,0095),"+
-                    "(87236,'ESTADISTICA','INSTRUMENTOS DE CAPTACION Y ANALISIS DE DATOS',3,1,0111),"+
-                    "(87242,'ESTADISTICA','SEMINARIO DE APLICACIONES ESTADISTICAS',3,1,0116),"+
-                    "(89274,'ESTADISTICA','LENGUA II',3,1,0010),"+
+                    "(87222,'ESTADÍSTICA','MUESTREO',3,1,0108),"+
+                    "(87224,'ESTADÍSTICA','MODELOS DE REGRESIÓN LINEAL Y NO LINEAL',3,1,0109),"+
+                    "(87228,'ESTADÍSTICA','PROGRAMACIÓN ESTADÍSTICA',3,1,0110),"+
+                    "(87235,'ESTADÍSTICA','PROBABILIDAD I',3,1,0095),"+
+                    "(87236,'ESTADÍSTICA','INSTRUMENTOS DE CAPTACIÓN Y ANÁLISIS DE DATOS',3,1,0111),"+
+                    "(87242,'ESTADÍSTICA','SEMINARIO DE APLICACIONES ESTADÍSTICAS',3,1,0116),"+
+                    "(89274,'ESTADÍSTICA','LENGUA II',3,1,0010),"+
                     //SECCION 2
-                    "(87246,'ESTADISTICA','MUESTREO',3,2,0112),"+
-                    "(87248,'ESTADISTICA','MODELOS DE REGRESION LINEAL Y NO LINEAL',3,2,0101),"+
-                    "(87250,'ESTADISTCIA','PROGRAMACION ESTADISTICA',3,2,0113),"+
-                    "(87251,'ESTADISTICA','PROBABILIDAD I',3,2,0016),"+
-                    "(87252,'ESTADISTICA','INTRUMENTOS DE CAPTACION Y ANALISIS DE DATOS',3,2,0114),"+
-                    "(87253,'ESTADISTICA','SEMINARIO DE APLICACIONES ESTADISTICAS',3,2,0114),"+
+                    "(87246,'ESTADÍSTICA','MUESTREO',3,2,0112),"+
+                    "(87248,'ESTADÍSTICA','MODELOS DE REGRESIÓN LINEAL Y NO LINEAL',3,2,0101),"+
+                    "(87250,'ESTADISTICA','PROGRAMACIÓN ESTADÍSTICA',3,2,0113),"+
+                    "(87251,'ESTADÍSTICA','PROBABILIDAD I',3,2,0016),"+
+                    "(87252,'ESTADÍSTICA','INTRUMENTOS DE CAPTACIÓN Y ANÁLISIS DE DATOS',3,2,0114),"+
+                    "(87253,'ESTADÍSTICA','SEMINARIO DE APLICACIONES ESTADÍSTICAS',3,2,0114),"+
                     //SECCION 3
-                    "(91576,'ESTADISTICA','MUESTREO',3,3,0106),"+
-                    "(91577,'ESTADISTICA','MODELOS DE REGRESION LINEAL Y NO LINEAL',3,3,0114),"+
-                    "(91578,'ESTADISTICA','PROGRAMACION ESTADISTICA',3,3,0075),"+
-                    "(91581,'ESTADISTICA','PROBABILIDAD I',3,3,0045),"+
-                    "(91582,'ESTADISTICA','INSTRUMENTOS DE CAPTACION Y ANALISIS DE DATOS',3,3,0091),"+
-                    "(91584,'ESTADISTICA','SEMINARIO DE APLICACIONES ESTADISTICAS',3,3,0115),"+
+                    "(91576,'ESTADÍSTICA','MUESTREO',3,3,0106),"+
+                    "(91577,'ESTADÍSTICA','MODELOS DE REGRESIÓN LINEAL Y NO LINEAL',3,3,0114),"+
+                    "(91578,'ESTADÍSTICA','PROGRAMACIÓN ESTADÍSTICA',3,3,0075),"+
+                    "(91581,'ESTADÍSTICA','PROBABILIDAD I',3,3,0045),"+
+                    "(91582,'ESTADÍSTICA','INSTRUMENTOS DE CAPTACIÓN Y ANÁLISIS DE DATOS',3,3,0091),"+
+                    "(91584,'ESTADÍSTICA','SEMINARIO DE APLICACIONES ESTADÍSTICAS',3,3,0115),"+
                     //BLOQUE 5
                     //SECCION 1
-                    "(91128,'ESTADISTICA','MODELOS ESPACIOS-TEMPORALES',5,1,0110),"+
-                    "(91531,'ESTADISTICA','MODELOS DE REGRESION NO PARA,ETRICA Y SEMIPARAMETRICA',5,1,0101),"+
-                    "(91534,'ESTADISTICA','MINERIA DE DATOS Y APRENDIZAJE MAQUINA',5,1,0116),"+
-                    "(91535,'ESTADISTICA','TEORIA ESTADISTICA',5,1,0117),"+
-                    "(91537,'ESTADISTICA','CONSULTORIA ESTADISTICA',5,1,0119),"+
+                    "(91128,'ESTADÍSTICA','MODELOS ESPACIOS-TEMPORALES',5,1,0110),"+
+                    "(91531,'ESTADÍSTICA','MODELOS DE REGRESIÓN NO PARAMÉTRICA Y SEMIPARAMÉTRICA',5,1,0101),"+
+                    "(91534,'ESTADÍSTICA','MINERÍA DE DATOS Y APRENDIZAJE MÁQUINA',5,1,0116),"+
+                    "(91535,'ESTADÍSTICA','TEORÍA ESTADÍSTICA',5,1,0117),"+
+                    "(91537,'ESTADÍSTICA','CONSULTORÍA ESTADÍSTICA',5,1,0119),"+
                     //SECCION 2
-                    "(91538,'ESTADISTICA','MODELOS ESPACIOS-TEMPORALES',5,2,0109),"+
-                    "(91540,'ESTADISTICA','MODELOS DE REGRESION NO PARAMETRICA Y SEMIPARAMETRICA',5,2,0116),"+
-                    "(91541,'ESTADISTICA','MINERIA DE DATOS Y APRENDIZAJE MAQUINA',5,2,0117),"+
-                    "(91542,'ESTADISTICA','TEORIA ESTADISTICA',5,2,0109),"+
-                    "(91545,'ESTADISTICA','CONSULTORIA ESTADISTICA',5,2,0110),"+
+                    "(91538,'ESTADÍSTICA','MODELOS ESPACIOS-TEMPORALES',5,2,0109),"+
+                    "(91540,'ESTADÍSTICA','MODELOS DE REGRESIÓN NO PARAMÉTRICA Y SEMIPARAMÉTRICA',5,2,0116),"+
+                    "(91541,'ESTADÍSTICA','MINERÍA DE DATOS Y APRENDIZAJE MÁQUINA',5,2,0117),"+
+                    "(91542,'ESTADÍSTICA','TEORÍA ESTADÍSTICA',5,2,0109),"+
+                    "(91545,'ESTADÍSTICA','CONSULTORÍA ESTADÍSTICA',5,2,0110),"+
                     //SECCION 3
-                    "(97138,'ESTADISTICA','MODELOS ESPACIOS-TEMPORALES',5,3,0045),"+
-                    "(97139,'ESTADISTICA','MODELOS DE REGRESION NO PARAMETRICA Y SEMIPARAMETRICA',5,3,0118),"+
-                    "(97140,'ESTADISTICA','MINERIA DE DATOS Y APREDIZAJE MAQUINA',5,3,0075),"+
-                    "(97141,'ESTADISTICA','TEORIA ESTADISTICA',5,3,0106),"+
-                    "(97142,'ESTADISTICA','CONSULTORIA ESTADISTICA',5,3,0111),"+
+                    "(97138,'ESTADÍSTICA','MODELOS ESPACIOS-TEMPORALES',5,3,0045),"+
+                    "(97139,'ESTADÍSTICA','MODELOS DE REGRESIÓN NO PARAMÉTRICA Y SEMIPARAMÉTRICA',5,3,0118),"+
+                    "(97140,'ESTADÍSTICA','MINERÍA DE DATOS Y APREDIZAJE MÁQUINA',5,3,0075),"+
+                    "(97141,'ESTADÍSTICA','TEORÍA ESTADÍSTICA',5,3,0106),"+
+                    "(97142,'ESTADÍSTICA','CONSULTORÍA ESTADÍSTICA',5,3,0111),"+
                     //BLOQUE 7
                     //SECCION 1
 
-                    "(96781,'ESTADISTICA','BOOTSTRAP Y PRUEBAS DE PERMUTACIÓN',7,1,0117),"+
-                    "(19541,'ESTADISTICA','VIZUALIZACION DE DATOS',7,1,0075),"+
-                    "(19524,'ESTADISTICA','ESTADISTICA EN LA SALUD',7,1,0119),"+
-                    "(97025,'ESTADISTICA','SERVICIO SOCIAL',7,1,0120),"+
-                    "(97027,'ESTADISTICA','EXPERIENCIA RECEPCIONAL I',7,1,0121),"+
+                    "(96781,'ESTADÍSTICA','BOOTSTRAP Y PRUEBAS DE PERMUTACIÓN',7,1,0117),"+
+                    "(19541,'ESTADÍSTICA','VIZUALIZACIÓN DE DATOS',7,1,0075),"+
+                    "(19524,'ESTADÍSTICA','ESTADÍSTICA EN LA SALUD',7,1,0119),"+
+                    "(97025,'ESTADÍSTICA','SERVICIO SOCIAL',7,1,0120),"+
+                    "(97027,'ESTADÍSTICA','EXPERIENCIA RECEPCIONAL I',7,1,0121),"+
                     //SECCION 2
-                    "(15758,'ESTADISTICA','BOOTSTRAP Y PRUEBAS DE PERMUTACION',7,2,0102),"+
-                    "(19599,'ESTADISTICA','VISUALIZACION DE DATOS',7,2,0122),"+
-                    "(19529,'ESTADISTICA','ESTADISTICA EN LA SALUD',7,2,0123),"+
-                    "(15757,'ESTADISTICA','SERVICIO SOCIAL',7,2,0120),"+
-                    "(13594,'ESTADISTICA','EXPERIENCIA RECEPCIONAL I',7,2,0001),"+
+                    "(15758,'ESTADÍSTICA','BOOTSTRAP Y PRUEBAS DE PERMUTACION',7,2,0102),"+
+                    "(19599,'ESTADÍSTICA','VISUALIZACIÓN DE DATOS',7,2,0122),"+
+                    "(19529,'ESTADÍSTICA','ESTADÍSTICA EN LA SALUD',7,2,0123),"+
+                    "(15757,'ESTADÍSTICA','SERVICIO SOCIAL',7,2,0120),"+
+                    "(13594,'ESTADÍSTICA','EXPERIENCIA RECEPCIONAL I',7,2,0001),"+
                     //SECCION 3
-                    "(15941,'ESTADISTICA','EXPERIENCIA RECEPCIONAL II',7,3,0118),"+
-                    "(20806,'ESTADISTICA','SERVICIO SOCIAL',7,3,0120),"+
+                    "(15941,'ESTADÍSTICA','EXPERIENCIA RECEPCIONAL II',7,3,0118),"+
+                    "(20806,'ESTADÍSTICA','SERVICIO SOCIAL',7,3,0120),"+
                     //SECCION 4
-                    "(20811,'ESTADISTICA','SERVICIO SOCIAL',7,4,0120),"+
-                    "(21493,'ESTADISTICA','EXPERIENCIA RECEPCIONAL',7,4,0091)"+";");
-            Toast.makeText(this,"insertados",Toast.LENGTH_LONG).show();
+                    "(20811,'ESTADÍSTICA','SERVICIO SOCIAL',7,4,0120),"+
+                    "(21493,'ESTADÍSTICA','EXPERIENCIA RECEPCIONAL',7,4,0091)"+";");
+            Toast.makeText(this,"Descargando Datos...",Toast.LENGTH_LONG).show();
             database.setTransactionSuccessful();
         }catch(SQLiteException e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
@@ -1670,17 +1670,17 @@ public class MainActivity extends AppCompatActivity {
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,JUEVES,VIERNES) values"+
                     "(85505,'6','11:00-13:00','11:00-13:00','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,VIERNES) values"+
-                    "(85506,'6','11:00-13:00','9:00-11:00');");
+                    "(85506,'6','11:00-13:00','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
                     "(85506,'4','15:00-17:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES,JUEVES) values"+
-                    "(85507,'6','9:00-11:00','9:00-11:00','9:00-11:00');");
+                    "(85507,'6','09:00-11:00','09:00-11:00','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MIERCOLES,VIERNES) values"+
-                    "(85508,'6','7:00-9:00','11:00-13:00','7:00-9:00');");
+                    "(85508,'6','07:00-09:00','11:00-13:00','07:00-9:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
-                    "(85511,'CC1','9:00-11:00');");
+                    "(85511,'CC1','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
-                    "(85511,'CC2','7:00-9:00');");
+                    "(85511,'CC2','07:00-09:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES) values"+
                     "(85511,'214','15:00-17:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
@@ -1692,9 +1692,9 @@ public class MainActivity extends AppCompatActivity {
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES,JUEVES) values"+
                     "(85524,'6','13:00-15:00','13:00-15:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,VIERNES) values"+
-                    "(88311,'F403','9:00-11:00','09:00-11:00');");
+                    "(88311,'F403','09:00-11:00','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES) values"+
-                    "(88311,'F101','11-13');");
+                    "(88311,'F101','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
                     "(92747,'105','17:00-19:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
@@ -1723,15 +1723,15 @@ public class MainActivity extends AppCompatActivity {
 
 //BLOQUE 1 - SECCION 3
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES,JUEVES) values"+
-                    "(85545,'6','7:00-9:00','7:00-9:00','7:00-9:00');");
+                    "(85545,'6','07:00-09:00','07:00-09:00','07:00-09:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,JUEVES,VIERNES) values"+
-                    "(85556,'4','9:00-11:00','9:00-11:00','9:00-11:00');");
+                    "(85556,'4','09:00-11:00','09:00-11:00','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MIERCOLES,JUEVES) values"+
                     "(85549,'4','13:00-15:00', '11:00-13:00', '13:00-15:00');");
            database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,JUEVES,VIERNES) values"+
                     "(85558,'4','11:00-13:00','11:00-13:00','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES) values"+
-                    "(85559,'CC3','9:00-11:00','9:00-11:00');");
+                    "(85559,'CC3','09:00-11:00','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
                     "(85559,'214','13:00-15:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,VIERNES) values"+
@@ -1745,25 +1745,25 @@ public class MainActivity extends AppCompatActivity {
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
                     "(87222,'111','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
-                    "(87222,'4','9:00-11:00');");
+                    "(87222,'4','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES) values"+
                     "(87222,'113','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
-                    "(87224,'4','9:00-11:00');");
+                    "(87224,'4','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES,VIERNES) values"+
-                    "(87224,'112','9:00-11:00','9:00-11:00');");
+                    "(87224,'112','09:00-11:00','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MARTES,MIERCOLES) values"+
                     "(87228,'214','13:00-15:00','13:00-15:00','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
-                    "(87235,'11','9:00-11:00');");
+                    "(87235,'111','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES) values"+
                     "(87235,'105','11:00-13:00','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MIERCOLES,VIERNES) values"+
-                    "(87236,'4','7:00-9:00','7:00-9:00','7:00-9:00');");
+                    "(87236,'4','07:00-9:00','07:00-9:00','07:00-09:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
                     "(87242,'107','13:00-14:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,JUEVES) values"+
-                    "(87242,'111','7:00-9:00','7:00-9:00');");
+                    "(87242,'111','07:00-9:00','07:00-9:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
                     "(89274,'5','13:00-15:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
@@ -1777,11 +1777,11 @@ public class MainActivity extends AppCompatActivity {
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES,JUEVES) values"+
                     "(87246,'113','17:00-19:00','17:00-19:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
-                    "(87248,'112','9:00-11:00');");
+                    "(87248,'112','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES) values"+
-                    "(87248,'4','7:00-9:00');");
+                    "(87248,'4','07:00-09:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
-                    "(87248,'105','7:00-9:00');");
+                    "(87248,'105','07:00-09:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
                     "(87250,'CC2','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,JUEVES) values"+
@@ -1789,9 +1789,9 @@ public class MainActivity extends AppCompatActivity {
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES,VIERNES) values"+
                     "(87251,'111','11:00-13:00','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES) values"+
-                    "(87251,'106','9:00-11:00');");
+                    "(87251,'106','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MARTES,VIERNES) values"+
-                    "(87252,'113','9:00-11:00','9:00-11:00','9:00-11:00');");
+                    "(87252,'113','09:00-11:00','09:00-11:00','9:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
                     "(87253,'111','13:00-14:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES,JUEVES) values"+
@@ -1833,25 +1833,25 @@ public class MainActivity extends AppCompatActivity {
 
 //BLOQUE 5 - SECCION 1
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES,JUEVES) values"+
-                    "(91528,'214','9:00-11:00','7:00-9:00');");
+                    "(91528,'214','09:00-11:00','07:00-09:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
-                    "(91528,'113','7:00-9:00');");
+                    "(91528,'113','07:00-09:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
-                    "(91531,'214','9:00-11:00');");
+                    "(91531,'214','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES,VIERNES) values"+
-                    "(91531,'113','9:00-11:00','11:00-13:00');");
+                    "(91531,'113','09:00-11:00','11:00-13:00');");
 
 //BLOQUE 5 - SECCION 2
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MARTES,MIERCOLES) values"+
-                    "(91534,'214','11:00-13:00','9:00-11:00','11:00-13:00');");
+                    "(91534,'214','11:00-13:00','09:00-11:00','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
                     "(91535,'106','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES) values"+
                     "(91535,'111','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
-                    "(91535,'F402','9:00-11:00');");
+                    "(91535,'F402','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MARTES,MIERCOLES) values"+
-                    "(91537,'113','7:00-9:00','7:00-9:00','7:00-9:00');");
+                    "(91537,'113','07:00-9:00','07:00-09:00','07:00-09:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MARTES) values"+
                     "(91538,'214','13:00-15:00','15:00-17:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
@@ -1883,11 +1883,11 @@ public class MainActivity extends AppCompatActivity {
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,VIERNES) values"+
                     "(97140,'107','11:00-13:00','7:00-9:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
-                    "(97140,'214','7:00-9:00');");
+                    "(97140,'214','07:00-09:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
-                    "(97141,'F402','9:00-11:00');");
+                    "(97141,'F402','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES,VIERNES) values"+
-                    "(97141,'107','9:00-11:00','11:00-13:00');");
+                    "(97141,'107','09:00-11:00','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES) values"+
                     "(97142,'5','11:00-13:00','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES) values"+
@@ -1901,13 +1901,13 @@ public class MainActivity extends AppCompatActivity {
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
                     "(96781,'F102','11:00-13:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES,JUEVES) values"+
-                    "(14662,'F402','9:00-11:00','9:00-11:00','9:00-11:00');");
+                    "(14662,'F402','09:00-11:00','09:00-11:00','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES,VIERNES) values"+
                     "(14664,'F402','11:00-13:00','11:00-13:00','13:00-15:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,VIERNES) values"+
-                    "(97025,'5','9:00-11:00','9:00-11:00');");
+                    "(97025,'5','09:00-11:00','09:00-11:00');");
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,JUEVES) values"+
-                    "(97027,'5','7:00-9:00','7:00-9:00');");
+                    "(97027,'5','07:00-09:00','07:00-9:00');");
 
 //BLOQUE 7 - SECCION 2
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
@@ -1935,27 +1935,27 @@ public class MainActivity extends AppCompatActivity {
 
 //BLOQUE 7 - SECCION 2
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES) values"+
-                    "(15941,'107','7:00-9:00','7:00-9:00');");
+                    "(15941,'107','07:00-09:00','07:00-09:00');");
 //ISO
 //BLOQUE 1 - SECCION 1 IS
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES,JUEVES) values"+
-                    "(73230,'104','8:00-9:00','9:00-11:00','7:00-9:00');");
+                    "(73230,'104','08:00-09:00','09:00-11:00','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MIERCOLES) values"+
-                    "(73231,'104','7:00-9:00','7:00-9:00');");
+                    "(73231,'104','07:00-09:00','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
-                    "(73231,'CC2','7:00-9:00');");
+                    "(73231,'CC2','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,MIERCOLES) values"+
-                    "(73272,'104','9:00-11:00','11:00-13:00');");
+                    "(73272,'104','09:00-11:00','11:00-13:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,JUEVES) values"+
                     "(96703,'104','11:00-13:00','11:00-13:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,JUEVES,VIERNES) values"+
-                    "(73274,'104','9:00-11:00','9:00119:00','9:00-11:00');");
+                    "(73274,'104','09:00-11:00','09:00-11:00','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,JUEVES,VIERNES) values"+
                     "(73231,'CC3','11:00-13:00','11:00-13:00','11:00-13:00');");
@@ -2006,19 +2006,19 @@ public class MainActivity extends AppCompatActivity {
 //BLOQUE3 SECCION1
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,JUEVES) values"+
-                    "(75641,'F403','9:00-11:00','7:00-9:00');");
+                    "(75641,'F403','09:00-11:00','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
-                    "(75641,'CC3','9:00-11:00');");
+                    "(75641,'CC3','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
-                    "(75637,'CC2','7:00-9:00');");
+                    "(75637,'CC2','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
-                    "(75637,'103','7:00-9:00');");
+                    "(75637,'103','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
-                    "(75637,'F403','9:00-11:00');");
+                    "(75637,'F403','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
                     "(75649,'112','13:00-14:00');");
@@ -2033,10 +2033,10 @@ public class MainActivity extends AppCompatActivity {
                     "(75633,'CC2','11:00-13:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
-                    "(75647,'CC2','9:00-11:00');");
+                    "(75647,'CC2','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES,JUEVES) values"+
-                    "(75647,'F403','7:00-9:00','9:00-11:00');");
+                    "(75647,'F403','07:00-09:00','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
                     "(75778,'CC3','15:00-17:00');");
@@ -2131,13 +2131,13 @@ public class MainActivity extends AppCompatActivity {
 //BLOQUE5 SECCION1
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MIERCOLES) values"+
-                    "(80598,'F103','9:00-11:00','9:00-11:00');");
+                    "(80598,'F103','09:00-11:00','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
-                    "(80598,'CC2','9:00-11:00');");
+                    "(80598,'CC2','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MIERCOLES,JUEVES) values"+
-                    "(80600,'F103','13:00-14:00','7:00-9:00','7:00:-9:00');");
+                    "(80600,'F103','13:00-14:00','07:00-09:00','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MARTES) values"+
                     "(80602,'F103','11:00-13:00','11:00-13:00');");
@@ -2146,16 +2146,16 @@ public class MainActivity extends AppCompatActivity {
                     "(80602,'CC1','11:00-13:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MARTES) values"+
-                    "(80604,'F103','7:00-9:00','7:00-9:00');");
+                    "(80604,'F103','07:00-09:00','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
-                    "(80604,'CC3','7:00-9:00');");
+                    "(80604,'CC3','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,VIERNES) values"+
-                    "(80606,'F103','9:00-11:00','11:00-13:00');");
+                    "(80606,'F103','09:00-11:00','11:00-13:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES) values"+
-                    "(80606,'CC1','9:00-11:00');");
+                    "(80606,'CC1','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
                     "(80607,'103','15:00-17:00');");
@@ -2223,10 +2223,10 @@ public class MainActivity extends AppCompatActivity {
                     "(83492,'CC4','10:00-12:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES,JUEVES) values"+
-                    "(12342,'CDS','9:00-11:00','9:00-13:00');");
+                    "(12342,'CDS','09:00-11:00','09:00-13:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MIERCOLES,VIERNES)  values"+
-                    "(83497,'CC4','11:00-13:00','7:00-9:00','13:00-15:00');");
+                    "(83497,'CC4','11:00-13:00','07:00-09:00','13:00-15:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
                     "(83501,'112','17:00-20:00');");
@@ -2253,10 +2253,10 @@ public class MainActivity extends AppCompatActivity {
                     "(87276,'113','17:00-19:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
-                    "(12355,'112','9:00-11:00');");
+                    "(12355,'112','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
-                    "(12355,'111','9:00-11:00');");
+                    "(12355,'111','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
                     "(12348,'105','17:00-19:00');");
@@ -2271,22 +2271,22 @@ public class MainActivity extends AppCompatActivity {
                     "(87275,'113','13:00-15:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
-                    "(87272,'111','7:00-9:00');");
+                    "(87272,'111','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,VIERNES) values"+
-                    "(87272,'F103','7:00-9:00');");
+                    "(87272,'F103','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
-                    "(91336,'F403','7:00-9:00');");
+                    "(91336,'F403','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES) values"+
-                    "(91336,'113','9:00-11:00');");
+                    "(91336,'113','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES) values"+
-                    "(95601,'CIDI','7:00-9:00');");
+                    "(95601,'CIDI','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,JUEVES) values"+
-                    "(95601,'CDS','7:00-9:00');");
+                    "(95601,'CDS','07:00-09:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
                     "(95603,'113','17:00-19:00');");
@@ -2295,7 +2295,7 @@ public class MainActivity extends AppCompatActivity {
                     "(95603,'105','17:00-19:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MIERCOLES,VIERNES) values"+
-                    "(12423,'CDS','7:00-9:00','7:00-10:00');");
+                    "(12423,'CDS','07:00-09:00','07:00-10:00');");
 
 
 //BLOQUE7 SECCION2
@@ -2328,7 +2328,7 @@ public class MainActivity extends AppCompatActivity {
             //BLOQUE 1 SECCION 1 TECO
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,LUNES,MARTES) values"+
-                    "(73282,'103','11:00-13:00','9:00-11:00');");
+                    "(73282,'103','11:00-13:00','09:00-11:00');");
 
             database.execSQL("insert into Horario(IDNRC,IDSALON,MARTES) values"+
                     "(73283,'111','11:00-13:00');");
@@ -2630,13 +2630,13 @@ public class MainActivity extends AppCompatActivity {
               //      __________________
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, VIERNES) values" +
-                    "(73238, '102', '7:00-9:00', '7:00-9:00')"+";");
+                    "(73238, '102', '07:00-09:00', '07:00-09:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, MIERCOLES, VIERNES ) values" +
-                    "(73239, '102', '9:00-11:00', '8:00-9:00', '9:00-11:00')"+";");
+                    "(73239, '102', '09:00-11:00', '08:00-09:00', '09:00-11:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MARTES, MIERCOLES) values" +
-                    "(73241, '102','9:00-11:00','7:00-9:00')"+";");
+                    "(73241, '102','09:00-11:00','07:00-09:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, MIERCOLES, VIERNES) values" +
                     "(76731,'102', '11:00-13:00','11:00-13:00','11:00-13:00')"+";");
@@ -2657,7 +2657,7 @@ public class MainActivity extends AppCompatActivity {
                     "(73271,'102', '15:00-17:00','13:00-15:00','15:00-17:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MIERCOLES) values" +
-                    "(75723, '102','9:00-11:00')"+";");
+                    "(75723, '102','09:00-11:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MIERCOLES) values" +
                     "(75733, '102', '17:00-19:00')"+";");
@@ -2669,22 +2669,22 @@ public class MainActivity extends AppCompatActivity {
                     "(75733, '104', '11:00-13:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, VIERNES) values" +
-                    "(75720, '104', '8:00-9:00')"+";");
+                    "(75720, '104', '08:00-09:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MIERCOLES) values" +
                     "(13451, '105', '14:00-15:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MIERCOLES) values" +
-                    "(75723, '105', '9:00-11:00')"+";");
+                    "(75723, '105', '09:00-11:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MARTES, VIERNES) values" +
-                    "(75732, '105', '9:00-11:00', '11:00-12:00')"+";");
+                    "(75732, '105', '09:00-11:00', '11:00-12:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, JUEVES) values" +
-                    "(95821, '105', '9:00-11:00', '11:00-13:00')"+";");
+                    "(95821, '105', '09:00-11:00', '11:00-13:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MIERCOLES) values" +
-                    "(75720, '105', '7:00-9:00')"+";");
+                    "(75720, '105', '07:00-09:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, JUEVES) values" +
                     "(75724, '105', '17:00-19:00')"+";");
@@ -2693,7 +2693,7 @@ public class MainActivity extends AppCompatActivity {
                     "(13451, '106', '13:00-15:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MARTES, JUEVES) values" +
-                    "(80693, 'CIDI', '7:00-9:00','7:00-9:00')"+";");
+                    "(80693, 'CIDI', '07:00-09:00','07:00-09:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, MARTES, VIERNES) values" +
                     "(83557, 'CIDI', '15:00-17:00','18:00-20:00', '15:00-17:00')"+";");
@@ -2708,7 +2708,7 @@ public class MainActivity extends AppCompatActivity {
                     "(83562, 'CIDI', '15:00-17:00', '15:00-20:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, MIERCOLES) values" +
-                    "(83566, 'CIDI', '9:00-11:00', '9:00-11:00')"+";");
+                    "(83566, 'CIDI', '09:00-11:00', '09:00-11:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, JUEVES) values" +
                     "(19469, 'CIDI', '19:00-21:00', '19:00-21:00')"+";");
@@ -2717,19 +2717,19 @@ public class MainActivity extends AppCompatActivity {
                     "(87503, 'CIDI', '15:00-17:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON,  MARTES) values" +
-                    "(75720, 'CC1', '7:00-9:00')"+";");
+                    "(75720, 'CC1', '07:00-09:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MIERCOLES) values" +
-                     "(80705, 'CC1', '7:00-9:00')"+";");
+                     "(80705, 'CC1', '07:00-09:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, JUEVES) values" +
-                      "(73241, 'CC2', '9:00-11:00'	)"+";");
+                      "(73241, 'CC2', '09:00-11:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MARTES) values" +
                        "(73269, 'CC2', '17:00-19:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES) values" +
-                       "(13468, 'CC2', '9:00-11:00'	)"+";");
+                       "(13468, 'CC2', '09:00-11:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, MARTES) values" +
                        "(76756, 'CC2', '13:00-15:00', '13:00-15:00')"+";");
@@ -2774,16 +2774,16 @@ public class MainActivity extends AppCompatActivity {
                        "(80700, 'F101', '11:00-13:00', '11:00-13:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES  ) values" +
-                       "(80705, 'F101', '7:00-10:00')"+";");
+                       "(80705, 'F101', '07:00-10:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MARTES, VIERNES   ) values" +
                        "(83559, 'F101', '11:00-13:00', '11:00-13:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, JUEVES  ) values" +
-                       "(83565, 'F101', '7:00-10:00'	)"+";");
+                       "(83565, 'F101', '07:00-10:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, MARTES, VIERNES) values" +
-                       "(83567, 'F101', '11:00-13:00', '9:00-11:00', '9:00-11:00'	)"+";");
+                       "(83567, 'F101', '11:00-13:00', '09:00-11:00', '09:00-11:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MARTES) values" +
                        "(87503, 'F101', '15:00-17:00')"+";");
@@ -2792,13 +2792,13 @@ public class MainActivity extends AppCompatActivity {
                        "(87504, 'F101', '17:00-19:00', '17:00-19:00', '17:00-19:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MARTES, VIERNES) values" +
-                       "(87507, 'F101', '7:00-9:00', '7:00-9:00')"+";");
+                       "(87507, 'F101', '07:00-09:00', '07:00-09:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, JUEVES  ) values" +
                         "(13434, 'F104', '15:00-17:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, JUEVES  ) values" +
-                        "(75717, 'F104', '7:00-9:00', '7:00-9:00'	)"+";");
+                        "(75717, 'F104', '07:00-09:00', '07:00-09:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MARTES ) values" +
                         "(75723, 'F104', '15:00-17:00'	)"+";");
@@ -2819,7 +2819,7 @@ public class MainActivity extends AppCompatActivity {
                         "(80695, 'F104', '13:00-15:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, VIERNES ) values" +
-                        "(80697, 'F104', '9:00-11:00'	)"+";");
+                        "(80697, 'F104', '09:00-11:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON,  MARTES, JUEVES) values" +
                         "(13460, 'F104', '15:00-17:00', '15:00-17:00'	)"+";");
@@ -2831,13 +2831,13 @@ public class MainActivity extends AppCompatActivity {
                         "(13434, 'LABRED', '17:00-19:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, VIERNES) values" +
-                        "(75717, 'LABRED', '9:00-11:00'	)"+";");
+                        "(75717, 'LABRED', '09:00-11:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MIERCOLES) values" +
                         "(75718, 'LABRED', '13:00-15:00')"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, MARTES, MIERCOLES) values" +
-                        "(80697, 'LABRED', '9:00-11:00', '9:00-11:00'	)"+";");
+                        "(80697, 'LABRED', '09:00-11:00', '09:00-11:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, MIERCOLES, VIERNES) values" +
                         "(80707, 'LABRED', '10:00-13:00', '11:00-13:00', '15:00-20:00'	)"+";");
@@ -2849,12 +2849,12 @@ public class MainActivity extends AppCompatActivity {
                         "(83558, 'LABRED', '13:00-15:00', '13:00-15:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON,  LUNES, VIERNES) values" +
-                        "(95922, 'LABRED', '7:00-9:00', '7:00-9:00'	)"+";");
+                        "(95922, 'LABRED', '07:00-09:00', '07:00-09:00'	)"+";");
 
             database.execSQL("insert into Horario(IDNRC, IDSALON, LUNES, MIERCOLES, JUEVES) values" +
                         "(87500, 'LABRED', '15:00-17:00', '16:00-17:00', '17:00-19:00'	)"+";");
 
-            Toast.makeText(this,"Super",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Descargando Datos...",Toast.LENGTH_SHORT).show();
             database.setTransactionSuccessful();
         }catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();

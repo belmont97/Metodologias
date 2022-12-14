@@ -46,10 +46,6 @@ public class Pantalla_Carga extends AppCompatActivity {
         startActivity(ventana);
     }
 
-    public void VentanaHorarioProfe(View view){
-        Intent ventana = new Intent(getApplication(), ConsultaHorario2.class);
-        startActivity(ventana);
-    }
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menuacciones, menu);

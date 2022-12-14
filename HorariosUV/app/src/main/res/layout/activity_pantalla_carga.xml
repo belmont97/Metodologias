@@ -7,18 +7,18 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="249dp"
-        android:layout_height="403dp"
-        android:layout_marginTop="84dp"
+        android:layout_width="363dp"
+        android:layout_height="628dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_2"
-        tools:srcCompat="@drawable/logo_2" />
+        app:srcCompat="@drawable/timetableuv" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
-        style="@android:style/Widget.DeviceDefault.ProgressBar"
+        style="@android:style/Widget.DeviceDefault.ProgressBar.Large"
         android:layout_width="70dp"
         android:layout_height="76dp"
         android:layout_marginTop="40dp"
